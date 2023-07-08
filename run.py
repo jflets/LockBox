@@ -31,3 +31,16 @@ def read_master_password():
 def write_master_password(master_password):
     with open(MASTER_PASSWORD_FILE, "w") as file:
         file.write(master_password)
+
+def read_passwords():
+    try:
+        with open(PASSWORDS_FILE, "r") as file:
+            lines = file.readlines()
+            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}
+    except FileNotFoundError:
+        return {}
+
+def write_passwords(passwords):
+    with open(PASSWORDS_FILE, "w") as file:
+        for account, password in passwords.items():
+            file.write(f"{account}: {password}\n")
