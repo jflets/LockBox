@@ -59,3 +59,16 @@ def create_master_password():
 
     # Clear the master password from the terminal
     clear_terminal()
+
+def get_password_from_user():
+    password = ""
+    while True:
+        key = getpass.getpass("Enter the password: ")
+        if key == "":
+            print()
+            break
+        else:
+            password += key
+            sys.stdout.write("*")
+            sys.stdout.flush()
+    return password
