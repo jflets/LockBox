@@ -44,3 +44,18 @@ def write_passwords(passwords):
     with open(PASSWORDS_FILE, "w") as file:
         for account, password in passwords.items():
             file.write(f"{account}: {password}\n")
+
+def create_master_password():
+    password = input("Create a master password: ")
+
+    confirm_password = input("Confirm the master password: ")
+    while password != confirm_password:
+        print("Passwords do not match. Please try again.")
+        password = input("Create a master password: ")
+        confirm_password = input("Confirm the master password: ")
+
+    write_master_password(password)
+    print("Master password created successfully!")
+
+    # Clear the master password from the terminal
+    clear_terminal()
