@@ -20,3 +20,14 @@ def print_ascii_art():
                                                                 
     """
     print(ascii_art)
+
+def read_master_password():
+    try:
+        with open(MASTER_PASSWORD_FILE, "r") as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        return None
+
+def write_master_password(master_password):
+    with open(MASTER_PASSWORD_FILE, "w") as file:
+        file.write(master_password)
