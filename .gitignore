@@ -6,3 +6,5 @@ __pycache__/
 *.py[cod]
 node_modules/
 .github/
+master_password.txt
+passwords.txt
