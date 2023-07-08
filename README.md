@@ -1,32 +1,41 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# LockBox
 
-Welcome,
+LockBox is an advanced password management application built to securely store and organize your sensitive information. With its user-friendly command-line interface, LockBox ensures convenient access to your passwords while employing robust encryption algorithms to safeguard your data from unauthorized access. The application allows you to generate strong and unique passwords, eliminating the need to remember complex combinations. By adhering to best security practices, LockBox provides a secure environment for managing your passwords, ensuring the protection of your online accounts. Experience the convenience and peace of mind that LockBox brings, offering a reliable and efficient solution for your password management needs.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+# How to use
 
-## Reminders
+# User Experience (UX)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Key Points
 
-## Creating the Heroku app
+## Target Audience
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## User Stories
 
-1. `heroku/python`
-2. `heroku/nodejs`
+# Data Model
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Logicframe
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+# Features
 
-Connect your GitHub repository and deploy as normal.
+## Features Left to Implement
 
-## Constraints
+# Technologies Used
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+# Frameworks, Libraries and Programs Used
 
----
+# Testing
 
-Happy coding!
+## Validator Testing
+
+## Solved Bugs
+
+## Full Testing
+
+# Deployment
+
+## Local Development
+
+# Credits
+
+## Content
