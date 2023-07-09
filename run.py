@@ -134,4 +134,8 @@ def main():
     print_ascii_art()
     print("-" * 80)
 
-    
+        # Reading or creating the master password
+    master_password = read_master_password()
+    if master_password is None:
+        create_master_password()
+        master_password = read_master_password()
