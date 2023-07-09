@@ -148,3 +148,21 @@ def main():
         print("3. Remove Password")
         print("4. Quit")
         print("-" * 80)
+
+        # Getting user's choice
+        choice = input("Enter your choice (1-4): ")
+        print("-" * 80)
+
+        # Handling user's choice
+        if choice == "1":
+            display_passwords()
+        elif choice == "2":
+            add_password()
+        elif choice == "3":
+            remove_password()
+        elif choice == "4":
+            print("Exiting Password Manager. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
