@@ -76,3 +76,14 @@ def get_password_from_user():
 def generate_random_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
     return "".join(random.choice(characters) for _ in range(length))
+
+def display_passwords():
+    passwords = read_passwords()
+    print("Stored Passwords:\n")
+    if passwords:
+        for account, password in passwords.items():
+            print(f"Account: {account}")
+            print(f"Password: {password}")
+            print("-" * 80)
+    else:
+        print("No passwords stored.")
