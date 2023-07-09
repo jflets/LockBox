@@ -103,3 +103,14 @@ def add_password():
     passwords[account] = password
     write_passwords(passwords)
     print(f"Password successfully added to new account called {account}.")
+
+def remove_password():
+    account = input("Enter the account name: ")
+    passwords = read_passwords()
+    if account in passwords:
+        del passwords[account]
+        write_passwords(passwords)
+        print("Password removed successfully.")
+    else:
+        print("Password not found.")
+
