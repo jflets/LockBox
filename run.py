@@ -139,3 +139,12 @@ def main():
     if master_password is None:
         create_master_password()
         master_password = read_master_password()
+
+    # Main menu loop
+    while True:
+        # Displaying options
+        print("1. Display Passwords")
+        print("2. Add Password")
+        print("3. Remove Password")
+        print("4. Quit")
+        print("-" * 80)
