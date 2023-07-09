@@ -52,44 +52,33 @@ def display_passwords(username, passwords):
         print("No passwords stored for this user.")
     print("-" * 80)
 
-def add_password():
+def add_password(username):
     account = input("Enter the account name: ")
-    passwords = read_passwords()
-    if account in passwords:
-        print("An account with that name already exists.")
-        choice = input("Do you want to change the password? (y/n): ")
-        if choice.lower() == "y":
-            password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
-            if password_option == "1":
-                password = get_password_from_user()
-            elif password_option == "2":
-                length = int(input("Enter the length of the password (default is 12): ") or "12")
-                password = generate_random_password(length)
-            else:
-                print("Invalid option. Returning to main menu.")
-                return
-            passwords[account] = password
-            write_passwords(passwords)
-            print(f"Password for account '{account}' has been changed successfully.")
-        else:
-            print("Returning to main menu.")
+    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+    if password_option == "1":
+        password = get_password_from_user()
+    elif password_option == "2":
+        length = int(input("Enter the length of the password (default is 12): ") or "12")
+        password = generate_random_password(length)
     else:
-        password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
-        if password_option == "1":
-            password = get_password_from_user()
-        elif password_option == "2":
-            length = int(input("Enter the length of the password (default is 12): ") or "12")
-            password = generate_random_password(length)
-        else:
-            print("Invalid option. Returning to main menu.")
-            return
-        passwords[account] = password
-        write_passwords(passwords)
-        print(f"Password successfully added to new account called '{account}'.")
-    
-    print()
-    print("-" * 80)
+        print("Invalid option. Returning to the main menu.")
+        return
 
+    passwords = read_passwords(username)
+    if account in passwords:
+        choice = input(f"An account with the name '{account}' already exists for the user '{username}'. Do you want to change the password? (y/n): ")
+        if choice.lower() == "y":
+            passwords[account] = password
+            write_passwords(username, passwords)
+            print(f"Password for account '{account}' changed successfully.")
+        else:
+            print("Returning to the main menu.")
+    else:
+        passwords[account] = password
+        write_passwords(username, passwords)
+        print(f"Password added successfully to the new account '{account}' for the user '{username}'.")
+        print(f"Password: {password}")
+    print("-" * 80)
 
 def remove_password():
     account = input("Enter the account name: ")
