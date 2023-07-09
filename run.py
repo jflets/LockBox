@@ -40,9 +40,8 @@ def generate_random_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
     return "".join(random.choice(characters) for _ in range(length))
 
-def display_passwords():
-    passwords = read_passwords()
-    print("Stored Passwords:")
+def display_passwords(username, passwords):
+    print(f"Stored Passwords for user '{username}':")
     print()
     if passwords:
         for account, password in passwords.items():
@@ -50,8 +49,8 @@ def display_passwords():
             print(f"Password: {password}")
             print("-" * 80)
     else:
-        print("No passwords stored.\n")
-        print("-" * 80)
+        print("No passwords stored for this user.")
+    print("-" * 80)
 
 def add_password():
     account = input("Enter the account name: ")
