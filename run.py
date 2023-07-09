@@ -80,15 +80,15 @@ def add_password(username):
         print(f"Password: {password}")
     print("-" * 80)
 
-def remove_password():
+def remove_password(username):
     account = input("Enter the account name: ")
-    passwords = read_passwords()
+    passwords = read_passwords(username)
     if account in passwords:
         del passwords[account]
-        write_passwords(passwords)
-        print("Password removed successfully.")
+        write_passwords(username, passwords)
+        print(f"Password for account '{account}' removed successfully.")
     else:
-        print("Password not found.")
+        print(f"No password found for account '{account}'.")
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
