@@ -80,6 +80,7 @@ def generate_random_password(length=12):
 def display_passwords():
     passwords = read_passwords()
     print("Stored Passwords:")
+    print()
     if passwords:
         for account, password in passwords.items():
             print(f"Account: {account}")
@@ -87,22 +88,46 @@ def display_passwords():
             print("-" * 80)
     else:
         print("No passwords stored.\n")
+        print("-" * 80)
 
 def add_password():
     account = input("Enter the account name: ")
-    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
-    if password_option == "1":
-        password = get_password_from_user()
-    elif password_option == "2":
-        length = int(input("Enter the length of the password (default is 12): ") or "12")
-        password = generate_random_password(length)
-    else:
-        print("Invalid option. Returning to main menu.")
-        return
     passwords = read_passwords()
-    passwords[account] = password
-    write_passwords(passwords)
-    print(f"Password successfully added to new account called {account}.")
+    if account in passwords:
+        print("An account with that name already exists.")
+        choice = input("Do you want to change the password? (y/n): ")
+        if choice.lower() == "y":
+            password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+            if password_option == "1":
+                password = get_password_from_user()
+            elif password_option == "2":
+                length = int(input("Enter the length of the password (default is 12): ") or "12")
+                password = generate_random_password(length)
+            else:
+                print("Invalid option. Returning to main menu.")
+                return
+            passwords[account] = password
+            write_passwords(passwords)
+            print(f"Password for account '{account}' has been changed successfully.")
+        else:
+            print("Returning to main menu.")
+    else:
+        password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+        if password_option == "1":
+            password = get_password_from_user()
+        elif password_option == "2":
+            length = int(input("Enter the length of the password (default is 12): ") or "12")
+            password = generate_random_password(length)
+        else:
+            print("Invalid option. Returning to main menu.")
+            return
+        passwords[account] = password
+        write_passwords(passwords)
+        print(f"Password successfully added to new account called '{account}'.")
+    
+    print()
+    print("-" * 80)
+
 
 def remove_password():
     account = input("Enter the account name: ")
@@ -166,3 +191,5 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
+if __name__ == "__main__":
+    main()
