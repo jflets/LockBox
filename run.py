@@ -124,4 +124,14 @@ def main():
         print("Please resize your terminal to at least 80x24 to use the password manager.")
         return
     
+        # Displaying welcome message and ASCII art
+    print()
+    print("Welcome to the LockBox Password Manager!")
+    print("This program allows you to manage your passwords securely.")
+    print("You can store, view, add, remove passwords, and generate random passwords.")
+    print("You will be asked to create a master password if you don't already have one.")
+    print()
+    print_ascii_art()
+    print("-" * 80)
+
     
