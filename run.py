@@ -17,9 +17,9 @@ def write_master_password(username, master_password):
     with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "w") as file:
         file.write(master_password)
 
-def read_passwords():
+def read_passwords(username):
     try:
-        with open(PASSWORDS_FILE, "r") as file:
+        with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "r") as file:
             lines = file.readlines()
             return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}
     except FileNotFoundError:
