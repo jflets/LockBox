@@ -79,11 +79,27 @@ def generate_random_password(length=12):
 
 def display_passwords():
     passwords = read_passwords()
-    print("Stored Passwords:\n")
+    print("Stored Passwords:")
     if passwords:
         for account, password in passwords.items():
             print(f"Account: {account}")
             print(f"Password: {password}")
             print("-" * 80)
     else:
-        print("No passwords stored.")
+        print("No passwords stored.\n")
+
+def add_password():
+    account = input("Enter the account name: ")
+    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+    if password_option == "1":
+        password = get_password_from_user()
+    elif password_option == "2":
+        length = int(input("Enter the length of the password (default is 12): ") or "12")
+        password = generate_random_password(length)
+    else:
+        print("Invalid option. Returning to main menu.")
+        return
+    passwords = read_passwords()
+    passwords[account] = password
+    write_passwords(passwords)
+    print(f"Password successfully added to new account called {account}.")
