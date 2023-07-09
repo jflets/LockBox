@@ -25,8 +25,9 @@ def read_passwords(username):
     except FileNotFoundError:
         return {}
 
-def write_passwords(passwords):
-    with open(PASSWORDS_FILE, "w") as file:
+def write_passwords(username, passwords):
+    os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
+    with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "w") as file:
         for account, password in passwords.items():
             file.write(f"{account}: {password}\n")
 
