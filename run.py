@@ -12,8 +12,9 @@ def read_master_password(username):
     except FileNotFoundError:
         return None
 
-def write_master_password(master_password):
-    with open(MASTER_PASSWORD_FILE, "w") as file:
+def write_master_password(username, master_password):
+    os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
+    with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "w") as file:
         file.write(master_password)
 
 def read_passwords():
