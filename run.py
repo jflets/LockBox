@@ -3,8 +3,7 @@ import string
 import getpass
 import os
 
-PASSWORDS_FILE = "passwords.txt"
-MASTER_PASSWORD_FILE = "master_password.txt"
+PASSWORDS_DIR = "passwords/"
 
 def print_ascii_art():
     ascii_art = """
