@@ -31,33 +31,11 @@ def write_passwords(username, passwords):
         for account, password in passwords.items():
             file.write(f"{account}: {password}\n")
 
-def create_master_password():
-    password = input("Create a master password: ")
-
-    confirm_password = input("Confirm the master password: ")
-    while password != confirm_password:
-        print("Passwords do not match. Please try again.")
-        password = input("Create a master password: ")
-        confirm_password = input("Confirm the master password: ")
-
-    write_master_password(password)
-    print("Master password created successfully!")
-
-    # Clear the master password from the terminal
-    clear_terminal()
-
 def get_password_from_user():
-    password = ""
-    while True:
-        key = getpass.getpass("Enter the password: ")
-        if key == "":
-            print()
-            break
-        else:
-            password += key
-            sys.stdout.write("*")
-            sys.stdout.flush()
+    password = getpass.getpass("Enter password: ")
+    input("Press Enter to continue: ")
     return password
+
 
 def generate_random_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
