@@ -117,3 +117,11 @@ def remove_password():
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def main():
+    # Checking terminal size
+    rows, columns = os.popen('stty size', 'r').read().split()
+    if int(rows) < 24 or int(columns) < 80:
+        print("Please resize your terminal to at least 80x24 to use the password manager.")
+        return
+    
+    
