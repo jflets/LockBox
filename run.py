@@ -167,6 +167,7 @@ def create_new_account():
     write_passwords(username, passwords)  # Write the password for the new account
 
     print(f"New account '{account}' created successfully.")
+    clear_terminal()
     print("-" * 80)
 
     # Run the program normally
