@@ -157,3 +157,79 @@ def create_new_account():
             break
         else:
             print("Invalid choice. Please try again.")
+
+def main():
+    clear_terminal()
+
+    ascii_art = r"""
+    888                       888      888888b.
+    888                       888      888  "88b
+    888                       888      888  .88P
+    888      .d88b.   .d8888b 888  888 8888888K.   .d88b.  888  888
+    888     d88""88b d88P"    888 .88P 888  "Y88b d88""88b `Y8bd8P'
+    888     888  888 888      888888K  888    888 888  888   X88K
+    888     Y88..88P Y88b.    888 "88b 888   d88P Y88..88P .d8""8b.
+    88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
+
+    """
+    print(ascii_art)
+
+    print("Welcome to the LockBox Password Manager!")
+    print("This program allows you to manage your passwords securely.")
+
+    new_user = input("Are you a new user? (y/n): ")
+    if new_user.lower() == "y":
+        create_new_account()
+        return
+
+    username = input("Enter your username: ")
+    master_password = read_master_password(username)
+
+    if master_password is None:
+        print("Invalid username. Exiting Password Manager. Goodbye!")
+        return
+
+    attempts = 0
+    while attempts < 2:
+        entered_password = getpass.getpass("Enter your master password: ")
+        if entered_password == master_password:
+            clear_terminal()
+            print("Login successful!\n")
+            break
+        else:
+            print("Incorrect master password. Please try again.")
+            attempts += 1
+    else:
+        print("You have entered the wrong password multiple times.")
+        choice = input("Do you want to create a new master password and account? (y/n): ")
+        if choice.lower() == "y":
+            create_new_account()
+        else:
+            print("Exiting Password Manager. Goodbye!")
+            return
+
+    while True:
+        print("1. Display Passwords")
+        print("2. Add Password")
+        print("3. Remove Password")
+        print("4. Quit")
+        print("-" * 80)
+
+        choice = input("Enter your choice (1-4): ")
+        print("-" * 80)
+
+        if choice == "1":
+            user_passwords = read_passwords(username)
+            display_passwords(username, user_passwords)
+        elif choice == "2":
+            add_password(username)
+        elif choice == "3":
+            remove_password(username)
+        elif choice == "4":
+            print("Exiting Password Manager. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
