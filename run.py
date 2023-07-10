@@ -93,54 +93,67 @@ def remove_password(username):
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def main():
-    # Checking terminal size
-    rows, columns = os.popen('stty size', 'r').read().split()
-    if int(rows) < 24 or int(columns) < 80:
-        print("Please resize your terminal to at least 80x24 to use the password manager.")
-        return
-    
-        # Displaying welcome message and ASCII art
-    print()
+def create_new_account():
+    clear_terminal()
+
+    ascii_art = r"""
+    888                       888      888888b.
+    888                       888      888  "88b
+    888                       888      888  .88P
+    888      .d88b.   .d8888b 888  888 8888888K.   .d88b.  888  888
+    888     d88""88b d88P"    888 .88P 888  "Y88b d88""88b `Y8bd8P'
+    888     888  888 888      888888K  888    888 888  888   X88K
+    888     Y88..88P Y88b.    888 "88b 888   d88P Y88..88P .d8""8b.
+    88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
+
+    """
+    print(ascii_art)
+
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
-    print("You can store, view, add, remove passwords, and generate random passwords.")
-    print("You will be asked to create a master password if you don't already have one.")
-    print()
-    print_ascii_art()
+
+    username = input("Enter your desired username: ")
+    if os.path.isfile(f"{PASSWORDS_DIR}{username}/{username}.txt"):
+        print("Username already exists. Please choose a different username.")
+        return
+
+    master_password = getpass.getpass("Create a master password: ")
+    confirm_password = input("Confirm the master password: ")
+    while master_password != confirm_password:
+        print("Passwords do not match. Please try again.")
+        master_password = getpass.getpass("Create a master password: ")
+        confirm_password = input("Confirm the master password: ")
+
+    write_master_password(username, master_password)
+    print("New account and master password created successfully!")
+
+    account = input("Enter the account name for the new user: ")
+    password = get_password_from_user()
+    passwords = {account: password}
+    write_passwords(username, passwords)
+    print(f"New account '{account}' created successfully.")
     print("-" * 80)
 
-        # Reading or creating the master password
-    master_password = read_master_password()
-    if master_password is None:
-        create_master_password()
-        master_password = read_master_password()
-
-    # Main menu loop
+    # Run the program normally
     while True:
-        # Displaying options
         print("1. Display Passwords")
         print("2. Add Password")
         print("3. Remove Password")
         print("4. Quit")
         print("-" * 80)
 
-        # Getting user's choice
         choice = input("Enter your choice (1-4): ")
         print("-" * 80)
 
-        # Handling user's choice
         if choice == "1":
-            display_passwords()
+            user_passwords = read_passwords(username)
+            display_passwords(username, user_passwords)
         elif choice == "2":
-            add_password()
+            add_password(username)
         elif choice == "3":
-            remove_password()
+            remove_password(username)
         elif choice == "4":
             print("Exiting Password Manager. Goodbye!")
             break
         else:
             print("Invalid choice. Please try again.")
-
-if __name__ == "__main__":
-    main()
