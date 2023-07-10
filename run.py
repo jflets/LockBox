@@ -6,6 +6,9 @@ import os
 PASSWORDS_DIR = "passwords/"
 
 def read_master_password(username):
+    """
+    Read the master password for the specified username.
+    """
     try:
         with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:
             return file.read().strip()
@@ -13,11 +16,17 @@ def read_master_password(username):
         return None
 
 def write_master_password(username, master_password):
+    """
+    Write the master password for the specified username.
+    """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "w") as file:
         file.write(master_password)
 
 def read_passwords(username):
+    """
+    Read the stored passwords for the specified username.
+    """
     try:
         with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "r") as file:
             lines = file.readlines()
@@ -26,21 +35,33 @@ def read_passwords(username):
         return {}
 
 def write_passwords(username, passwords):
+    """
+    Write the provided passwords for the specified username.
+    """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "w") as file:
         for account, password in passwords.items():
             file.write(f"{account}: {password}\n")
 
 def get_password_from_user():
+    """
+    Prompt the user to enter a password without displaying the input.
+    """
     password = getpass.getpass("Enter password: ")
     input("Press Enter to continue: ")
     return password
 
 def generate_random_password(length=12):
+    """
+    Generate a random password of the specified length.
+    """
     characters = string.ascii_letters + string.digits + string.punctuation
     return "".join(random.choice(characters) for _ in range(length))
 
 def display_passwords(username, passwords):
+    """
+    Display the stored passwords for the specified username.
+    """
     print(f"Stored Passwords for user '{username}':")
     print()
     if passwords:
@@ -53,6 +74,9 @@ def display_passwords(username, passwords):
     print("-" * 80)
 
 def add_password(username):
+    """
+    Add a new password for the specified username and account.
+    """
     account = input("Enter the account name: ")
     password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
     if password_option == "1":
@@ -81,6 +105,9 @@ def add_password(username):
     print("-" * 80)
 
 def remove_password(username):
+    """
+    Remove the password for the specified username and account.
+    """
     account = input("Enter the account name: ")
     passwords = read_passwords(username)
     if account in passwords:
@@ -91,10 +118,16 @@ def remove_password(username):
         print(f"No password found for account '{account}'.")
 
 def clear_terminal():
+    """
+    Clear the terminal screen.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def create_new_account():
-    clear_terminal()
+    """
+    Create a new user account.
+    """
+    clear_terminal()  # Clear the terminal screen
 
     ascii_art = r"""
     888                       888      888888b.
@@ -107,7 +140,7 @@ def create_new_account():
     88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
 
     """
-    print(ascii_art)
+    print(ascii_art)  # Display the ASCII art
 
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
@@ -117,20 +150,22 @@ def create_new_account():
         print("Username already exists. Please choose a different username.")
         return
 
-    master_password = getpass.getpass("Create a master password: ")
+    master_password = getpass.getpass("Create a master password: ")  # Prompt the user to create a master password without displaying the input
     confirm_password = input("Confirm the master password: ")
     while master_password != confirm_password:
         print("Passwords do not match. Please try again.")
         master_password = getpass.getpass("Create a master password: ")
         confirm_password = input("Confirm the master password: ")
 
-    write_master_password(username, master_password)
+    write_master_password(username, master_password)  # Write the master password for the new user
+
     print("New account and master password created successfully!")
 
     account = input("Enter the account name for the new user: ")
-    password = get_password_from_user()
+    password = get_password_from_user()  # Prompt the user to enter a password without displaying the input
     passwords = {account: password}
-    write_passwords(username, passwords)
+    write_passwords(username, passwords)  # Write the password for the new account
+
     print(f"New account '{account}' created successfully.")
     print("-" * 80)
 
@@ -146,20 +181,21 @@ def create_new_account():
         print("-" * 80)
 
         if choice == "1":
-            user_passwords = read_passwords(username)
-            display_passwords(username, user_passwords)
+            user_passwords = read_passwords(username)  # Read the stored passwords for the current user
+            display_passwords(username, user_passwords)  # Display the stored passwords
         elif choice == "2":
-            add_password(username)
+            add_password(username)  # Add a new password for the current user
         elif choice == "3":
-            remove_password(username)
+            remove_password(username)  # Remove a password for the current user
         elif choice == "4":
             print("Exiting Password Manager. Goodbye!")
             break
         else:
             print("Invalid choice. Please try again.")
 
+
 def main():
-    clear_terminal()
+    clear_terminal()  # Clear the terminal screen
 
     ascii_art = r"""
     888                       888      888888b.
@@ -172,18 +208,18 @@ def main():
     88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
 
     """
-    print(ascii_art)
+    print(ascii_art)  # Display the ASCII art
 
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
 
     new_user = input("Are you a new user? (y/n): ")
     if new_user.lower() == "y":
-        create_new_account()
+        create_new_account()  # Create a new user account
         return
 
     username = input("Enter your username: ")
-    master_password = read_master_password(username)
+    master_password = read_master_password(username)  # Read the master password for the entered username
 
     if master_password is None:
         print("Invalid username. Exiting Password Manager. Goodbye!")
@@ -191,9 +227,9 @@ def main():
 
     attempts = 0
     while attempts < 2:
-        entered_password = getpass.getpass("Enter your master password: ")
+        entered_password = getpass.getpass("Enter your master password: ")  # Prompt the user to enter the master password without displaying the input
         if entered_password == master_password:
-            clear_terminal()
+            clear_terminal()  # Clear the terminal screen
             print("Login successful!\n")
             break
         else:
@@ -203,7 +239,7 @@ def main():
         print("You have entered the wrong password multiple times.")
         choice = input("Do you want to create a new master password and account? (y/n): ")
         if choice.lower() == "y":
-            create_new_account()
+            create_new_account()  # Create a new user account
         else:
             print("Exiting Password Manager. Goodbye!")
             return
@@ -219,12 +255,12 @@ def main():
         print("-" * 80)
 
         if choice == "1":
-            user_passwords = read_passwords(username)
-            display_passwords(username, user_passwords)
+            user_passwords = read_passwords(username)  # Read the stored passwords for the current user
+            display_passwords(username, user_passwords)  # Display the stored passwords
         elif choice == "2":
-            add_password(username)
+            add_password(username)  # Add a new password for the current user
         elif choice == "3":
-            remove_password(username)
+            remove_password(username)  # Remove a password for the current user
         elif choice == "4":
             print("Exiting Password Manager. Goodbye!")
             break
