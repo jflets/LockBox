@@ -197,29 +197,32 @@ def create_new_account():
     print("This program allows you to manage your passwords securely.")
     print("When creating a master password please ensure the following:")
     print("The password is more than 4 characters and contains 1 special character.\n")
-
-    username = input("Enter your desired username: ")  # Prompt the user to enter a desired username
+    # Prompt the user to enter a desired username
+    username = input("Enter your desired username: ")  
 
     if os.path.isfile(f"{PASSWORDS_DIR}{username}/{username}.txt"):
         print("Username already exists. Please choose a different username.")
         return
-
-    master_password = get_password_from_user("Create a master password: ")  # Prompt the user to create a master password without displaying the input
-    confirm_password = get_password_from_user("Confirm the master password: ")  # Prompt the user to confirm the master password
+    # Prompt the user to create a master password without displaying the input
+    master_password = get_password_from_user("Create a master password: ") 
+    # Prompt the user to confirm the master password
+    confirm_password = get_password_from_user("Confirm the master password: ")  
 
     while master_password != confirm_password:
         print("Passwords do not match. Please try again.")
         master_password = get_password_from_user("Create a master password: ")
         confirm_password = get_password_from_user("Confirm the master password: ")
-
-    write_master_password(username, master_password)  # Write the master password for the new user
+    # Write the master password for the new user
+    write_master_password(username, master_password)  
 
     print("New account and master password created successfully!")
-
-    account = input("Enter your account name: ")  # Prompt the user to enter the account name
-    password = get_password_from_user("Enter password: ")  # Prompt the user to enter a password without displaying the input
+    # Prompt the user to enter the account name
+    account = input("Enter your account name: ")  
+    # Prompt the user to enter a password without displaying the input
+    password = get_password_from_user("Enter password: ")  
     passwords = {account: password}
-    write_passwords(username, passwords)  # Write the password for the new account
+    # Write the password for the new account
+    write_passwords(username, passwords)  
 
     print(f"New account '{account}' created successfully.")
     clear_terminal()  # Clear the terminal screen
@@ -239,12 +242,16 @@ def create_new_account():
         print("-" * 80)
 
         if choice == "1":
-            user_passwords = read_passwords(username)  # Read the stored passwords for the current user
-            display_passwords(username, user_passwords)  # Display the stored passwords
+            # Read the stored passwords for the current user
+            user_passwords = read_passwords(username)  
+            # Display the stored passwords
+            display_passwords(username, user_passwords)  
         elif choice == "2":
-            add_password(username)  # Add a new password for the current user
+            # Add a new password for the current user
+            add_password(username)  
         elif choice == "3":
-            remove_password(username)  # Remove a password for the current user
+            # Remove a password for the current user
+            remove_password(username)  
         elif choice == "4":
             print("Exiting Password Manager. Goodbye!")
             break
@@ -275,9 +282,10 @@ def main():
     if new_user.lower() == "y":
         create_new_account()  # Create a new user account
         return
-
-    username = input("Enter your username: ")  # Prompt the user to enter their username
-    master_password = read_master_password(username)  # Read the stored master password for the username
+    # Prompt the user to enter their username
+    username = input("Enter your username: ")  
+    # Read the stored master password for the username
+    master_password = read_master_password(username)  
 
     if master_password is None:
         print("Invalid username. Exiting Password Manager. Goodbye!")
@@ -285,7 +293,8 @@ def main():
 
     attempts = 0
     while attempts < 2:
-        entered_password = get_password_from_user("Enter your master password: ")  # Prompt the user to enter their master password without displaying the input
+        # Prompt the user to enter their master password without displaying the input
+        entered_password = get_password_from_user("Enter your master password: ")  
         if entered_password == master_password:
             clear_terminal()  # Clear the terminal screen
             print("Login successful!\n")
@@ -313,12 +322,16 @@ def main():
         print("-" * 80)
 
         if choice == "1":
-            user_passwords = read_passwords(username)  # Read the stored passwords for the current user
-            display_passwords(username, user_passwords)  # Display the stored passwords
+            # Read the stored passwords for the current user
+            user_passwords = read_passwords(username) 
+            # Display the stored passwords
+            display_passwords(username, user_passwords) 
         elif choice == "2":
-            add_password(username)  # Add a new password for the current user
+            # Add a new password for the current user
+            add_password(username) 
         elif choice == "3":
-            remove_password(username)  # Remove a password for the current user
+            # Remove a password for the current user
+            remove_password(username)  
         elif choice == "4":
             print("Exiting Password Manager. Goodbye!")
             break
