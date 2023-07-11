@@ -1,7 +1,9 @@
 import random
 import string
-import getpass
 import os
+import sys
+import tty
+import termios
 
 PASSWORDS_DIR = "passwords/"
 
