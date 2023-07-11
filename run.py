@@ -127,7 +127,9 @@ def add_password(username):
 
     passwords = read_passwords(username)
     if account in passwords:
-        choice = input(f"An account with the name '{account}' already exists for the user '{username}'. Do you want to change the password? (y/n): ")
+        choice = input(
+            f"An account with the name '{account}' already exists for the user '{username}'. "
+            "Do you want to change the password? (y/n): ")
         if choice.lower() == "y":
             passwords[account] = password
             write_passwords(username, passwords)
