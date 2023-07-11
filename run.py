@@ -7,6 +7,7 @@ import termios
 
 PASSWORDS_DIR = "passwords/"
 
+
 def read_master_password(username):
     """
     Read the master password for the specified username.
@@ -17,6 +18,7 @@ def read_master_password(username):
     except FileNotFoundError:
         return None
 
+
 def write_master_password(username, master_password):
     """
     Write the master password for the specified username.
@@ -24,6 +26,7 @@ def write_master_password(username, master_password):
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "w") as file:
         file.write(master_password)
+
 
 def read_passwords(username):
     """
@@ -36,6 +39,7 @@ def read_passwords(username):
     except FileNotFoundError:
         return {}
 
+
 def write_passwords(username, passwords):
     """
     Write the provided passwords for the specified username.
@@ -44,6 +48,7 @@ def write_passwords(username, passwords):
     with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "w") as file:
         for account, password in passwords.items():
             file.write(f"{account}: {password}\n")
+
 
 def get_password_from_user(prompt="Enter password: "):
     """
@@ -88,12 +93,14 @@ def get_password_from_user(prompt="Enter password: "):
 
         return password
 
+
 def generate_random_password(length=12):
     """
     Generate a random password of the specified length.
     """
     characters = string.ascii_letters + string.digits + string.punctuation
     return "".join(random.choice(characters) for _ in range(length))
+
 
 def display_passwords(username, passwords):
     """
@@ -110,11 +117,12 @@ def display_passwords(username, passwords):
         print("No passwords stored for this user.")
     print("-" * 80)
 
+
 def add_password(username):
     """
     Add a new password for the specified username and account.
     """
-    account = input("Enter the account name: ")
+    account = input("Enter the site name associated with this password: ")
     password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
     if password_option == "1":
         password = get_password_from_user()
@@ -143,6 +151,7 @@ def add_password(username):
         print(f"Password: {password}")
     print("-" * 80)
 
+
 def remove_password(username):
     """
     Remove the password for the specified username and account.
@@ -156,11 +165,13 @@ def remove_password(username):
     else:
         print(f"No password found for account '{account}'.")
 
+
 def clear_terminal():
     """
     Clear the terminal.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def create_new_account():
     """
@@ -184,6 +195,8 @@ def create_new_account():
 
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
+    print("When creating a master password please ensure the following:")
+    print("The password is more than 4 characters and contains 1 special character.\n")
 
     username = input("Enter your desired username: ")  # Prompt the user to enter a desired username
 
@@ -203,13 +216,15 @@ def create_new_account():
 
     print("New account and master password created successfully!")
 
-    account = input("Enter the account name for the new user: ")  # Prompt the user to enter the account name
+    account = input("Enter your account name: ")  # Prompt the user to enter the account name
     password = get_password_from_user("Enter password: ")  # Prompt the user to enter a password without displaying the input
     passwords = {account: password}
     write_passwords(username, passwords)  # Write the password for the new account
 
     print(f"New account '{account}' created successfully.")
     clear_terminal()  # Clear the terminal screen
+    print("-" * 80)
+    print("Menu")
     print("-" * 80)
 
     # Load the menu loop
@@ -220,7 +235,7 @@ def create_new_account():
         print("4. Quit")
         print("-" * 80)
 
-        choice = input("Enter your choice (1-4): ")
+        choice = input("Enter the action you want to perform. Choose (1-4): ")
         print("-" * 80)
 
         if choice == "1":
@@ -235,6 +250,7 @@ def create_new_account():
             break
         else:
             print("Invalid choice. Please try again.")
+
 
 def main():
     clear_terminal()  # Clear the terminal screen
@@ -308,6 +324,7 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
+
 
 if __name__ == "__main__":
     main()
