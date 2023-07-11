@@ -13,7 +13,7 @@ def read_master_password(username):
     Read the master password for the specified username.
     """
     try:
-        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:
+        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:  # noqa
             return file.read().strip()
     except FileNotFoundError:
         return None
@@ -35,7 +35,7 @@ def read_passwords(username):
     try:
         with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "r") as file:
             lines = file.readlines()
-            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}
+            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}  # noqa
     except FileNotFoundError:
         return {}
 
@@ -52,7 +52,7 @@ def write_passwords(username, passwords):
 
 def get_password_from_user(prompt="Enter password: "):
     """
-    Prompt the user to enter a password without displaying the input, display "*".
+    Prompt the user to enter a password without displaying the input, display "*".  # noqa
     """
     while True:
         password = ""
@@ -84,11 +84,11 @@ def get_password_from_user(prompt="Enter password: "):
         print()  # Move to the next line after password input
 
         if len(password) < 4:
-            print("Password must be at least 4 characters long. Please try again.")
+            print("Password must be at least 4 characters long. Please try again.")  # noqa
             continue
 
         if not any(char in string.punctuation for char in password):
-            print("Password must contain at least 1 special character. Please try again.")
+            print("Password must contain at least 1 special character. Please try again.")  # noqa
             continue
 
         return password
@@ -123,11 +123,11 @@ def add_password(username):
     Add a new password for the specified username and account.
     """
     account = input("Enter the site name associated with this password: ")
-    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")  # noqa
     if password_option == "1":
         password = get_password_from_user()
     elif password_option == "2":
-        length = int(input("Enter the length of the password (default is 12): ") or "12")
+        length = int(input("Enter the length of the password (default is 12): ") or "12")  # noqa
         password = generate_random_password(length)
     else:
         print("Invalid option. Returning to the main menu.")
@@ -136,8 +136,9 @@ def add_password(username):
     passwords = read_passwords(username)
     if account in passwords:
         choice = input(
-            f"An account with the name '{account}' already exists for the user '{username}'. "
-            "Do you want to change the password? (y/n): ")
+            f"An account with the name '{account}' already exists for the user '{username}'. "  # noqa
+            "Do you want to change the password? (y/n): "
+        )
         if choice.lower() == "y":
             passwords[account] = password
             write_passwords(username, passwords)
@@ -147,7 +148,7 @@ def add_password(username):
     else:
         passwords[account] = password
         write_passwords(username, passwords)
-        print(f"Password added successfully to the new account '{account}' for the user '{username}'.")
+        print(f"Password added successfully to the new account '{account}' for the user '{username}'.")  # noqa
         print(f"Password: {password}")
     print("-" * 80)
 
@@ -196,7 +197,7 @@ def create_new_account():
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
     print("When creating a master password please ensure the following:")
-    print("The password is more than 4 characters and contains 1 special character.\n")
+    print("The password is more than 4 characters and contains 1 special character.\n")  # noqa
 
     # Prompt the user to enter a desired username
     username = input("Enter your desired username: ")
@@ -214,7 +215,7 @@ def create_new_account():
     while master_password != confirm_password:
         print("Passwords do not match. Please try again.")
         master_password = get_password_from_user("Create a master password: ")
-        confirm_password = get_password_from_user("Confirm the master password: ")
+        confirm_password = get_password_from_user("Confirm the master password: ")  # noqa
 
     # Write the master password for the new user
     write_master_password(username, master_password)
@@ -303,8 +304,8 @@ def main():
 
     attempts = 0
     while attempts < 2:
-        # Prompt the user to enter their master password without displaying the input
-        entered_password = get_password_from_user("Enter your master password: ")
+        # Prompt the user to enter their master password without displaying the input  # noqa
+        entered_password = get_password_from_user("Enter your master password: ")  # noqa
         if entered_password == master_password:
             clear_terminal()  # Clear the terminal screen
             print("Login successful!\n")
@@ -314,7 +315,7 @@ def main():
             attempts += 1
     else:
         print("You have entered the wrong password multiple times.")
-        choice = input("Do you want to create a new master password and account? (y/n): ")
+        choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
         if choice.lower() == "y":
             create_new_account()  # Create a new user account
         else:
