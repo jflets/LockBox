@@ -45,13 +45,48 @@ def write_passwords(username, passwords):
         for account, password in passwords.items():
             file.write(f"{account}: {password}\n")
 
-def get_password_from_user():
+def get_password_from_user(prompt="Enter password: "):
     """
-    Prompt the user to enter a password without displaying the input.
+    Prompt the user to enter a password without displaying the input, display "*".
     """
-    password = getpass.getpass("Enter password: ")
-    input("Press Enter to continue: ")
-    return password
+    while True:
+        password = ""
+        prompt_length = len(prompt)
+
+        # Disable terminal echoing
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        tty.setraw(fd)
+
+        try:
+            print(prompt, end="", flush=True)
+            while True:
+                char = sys.stdin.read(1)
+                if char == "\r" or char == "\n":
+                    print()
+                    break
+                elif char == "\x03":  # Handle Ctrl+C
+                    raise KeyboardInterrupt
+                else:
+                    password += char
+                    sys.stdout.write("*")
+                    sys.stdout.flush()
+
+        finally:
+            # Restore terminal settings
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+
+        print()  # Move to the next line after password input
+
+        if len(password) < 4:
+            print("Password must be at least 4 characters long. Please try again.")
+            continue
+
+        if not any(char in string.punctuation for char in password):
+            print("Password must contain at least 1 special character. Please try again.")
+            continue
+
+        return password
 
 def generate_random_password(length=12):
     """
