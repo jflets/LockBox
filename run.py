@@ -250,8 +250,8 @@ def main():
     88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
 
     """
-    print(ascii_art)  # Display the ASCII art
 
+    print(ascii_art)
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
 
@@ -260,8 +260,8 @@ def main():
         create_new_account()  # Create a new user account
         return
 
-    username = input("Enter your username: ")
-    master_password = read_master_password(username)  # Read the master password for the entered username
+    username = input("Enter your username: ")  # Prompt the user to enter their username
+    master_password = read_master_password(username)  # Read the stored master password for the username
 
     if master_password is None:
         print("Invalid username. Exiting Password Manager. Goodbye!")
@@ -269,7 +269,7 @@ def main():
 
     attempts = 0
     while attempts < 2:
-        entered_password = getpass.getpass("Enter your master password: ")  # Prompt the user to enter the master password without displaying the input
+        entered_password = get_password_from_user("Enter your master password: ")  # Prompt the user to enter their master password without displaying the input
         if entered_password == master_password:
             clear_terminal()  # Clear the terminal screen
             print("Login successful!\n")
