@@ -246,7 +246,7 @@ def create_new_account():
         print("4. Quit")
         print("-" * 80)
 
-        choice = input("Enter the action you want to perform. Choose (1-4): ")
+        choice = input("Enter your option (1-4): ")
         print("-" * 80)
 
         if choice == "1":
@@ -328,7 +328,7 @@ def main():
         print("4. Quit")
         print("-" * 80)
 
-        choice = input("Enter your choice (1-4): ")
+        choice = input("Enter your option (1-4): ")
         print("-" * 80)
 
         if choice == "1":
