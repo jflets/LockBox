@@ -158,7 +158,7 @@ def remove_password(username):
 
 def clear_terminal():
     """
-    Clear the terminal screen.
+    Clear the terminal.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -179,37 +179,40 @@ def create_new_account():
     88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
 
     """
+
     print(ascii_art)  # Display the ASCII art
 
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
 
-    username = input("Enter your desired username: ")
+    username = input("Enter your desired username: ")  # Prompt the user to enter a desired username
+
     if os.path.isfile(f"{PASSWORDS_DIR}{username}/{username}.txt"):
         print("Username already exists. Please choose a different username.")
         return
 
-    master_password = getpass.getpass("Create a master password: ")  # Prompt the user to create a master password without displaying the input
-    confirm_password = input("Confirm the master password: ")
+    master_password = get_password_from_user("Create a master password: ")  # Prompt the user to create a master password without displaying the input
+    confirm_password = get_password_from_user("Confirm the master password: ")  # Prompt the user to confirm the master password
+
     while master_password != confirm_password:
         print("Passwords do not match. Please try again.")
-        master_password = getpass.getpass("Create a master password: ")
-        confirm_password = input("Confirm the master password: ")
+        master_password = get_password_from_user("Create a master password: ")
+        confirm_password = get_password_from_user("Confirm the master password: ")
 
     write_master_password(username, master_password)  # Write the master password for the new user
 
     print("New account and master password created successfully!")
 
-    account = input("Enter the account name for the new user: ")
-    password = get_password_from_user()  # Prompt the user to enter a password without displaying the input
+    account = input("Enter the account name for the new user: ")  # Prompt the user to enter the account name
+    password = get_password_from_user("Enter password: ")  # Prompt the user to enter a password without displaying the input
     passwords = {account: password}
     write_passwords(username, passwords)  # Write the password for the new account
 
     print(f"New account '{account}' created successfully.")
-    clear_terminal()
+    clear_terminal()  # Clear the terminal screen
     print("-" * 80)
 
-    # Run the program normally
+    # Load the menu loop
     while True:
         print("1. Display Passwords")
         print("2. Add Password")
@@ -232,7 +235,6 @@ def create_new_account():
             break
         else:
             print("Invalid choice. Please try again.")
-
 
 def main():
     clear_terminal()  # Clear the terminal screen
