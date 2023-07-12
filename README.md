@@ -40,6 +40,42 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 # Features
 
+## User Account Creation
+
+- The application allows new users to create an account by providing a unique username and a master password. The master password is used to secure the account and protect access to the stored passwords.
+
+## Login and Authentication
+
+- Existing users can log in to their account by entering their username and master password. The application verifies the entered credentials to grant access to the stored passwords.
+
+## Display Stored Passwords
+
+- Once logged in, the user can view a list of their stored passwords. The application retrieves the passwords associated with the user's account and displays them, showing the account name and the corresponding password.
+
+## Add New Password
+
+- The user can add a new password to their account. They provide the account name and choose either to enter the password manually or generate a random password. If manually entered, the password is validated to meet certain criteria (e.g., minimum length and containing at least one special character). The new password is then stored securely in the user's account.
+
+## Remove Password
+
+- The user can remove a password from their account by specifying the account name. The application locates the corresponding password and removes it from the stored passwords.
+
+## Master Password Update
+
+- Users have the option to update their master password. They can choose to change their existing master password to enhance security. The application prompts them to enter the current master password for verification and then allows them to set a new master password.
+
+## Encryption and Security
+
+- The user's master password is securely stored using encryption techniques. This ensures that the master password cannot be easily accessed or compromised. Additionally, the application enforces certain password requirements and provides validation to enhance the security of stored passwords.
+
+## Error Handling
+
+- The application handles various error scenarios gracefully, such as invalid input, incorrect passwords, non-existing accounts, and file access errors. It provides informative error messages to guide users and ensure a smooth user experience.
+
+## Menu-based Navigation
+
+- The application presents users with a menu-based navigation system. Users can choose different options from the menu to perform specific actions, such as displaying passwords, adding passwords, removing passwords, updating the master password, and quitting the application.
+
 ## Features Left to Implement
 
 # Technologies Used
