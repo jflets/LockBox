@@ -78,6 +78,10 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 ## Features Left to Implement
 
+- Enhance the application by incorporating a password strength analysis feature.
+- Expand the password generation functionality by allowing users to customize the generated passwords according to their preferences.
+- Implement support for two-factor authentication as an additional layer of security for user accounts.
+
 # Technologies Used
 
 # Frameworks, Libraries and Programs Used
