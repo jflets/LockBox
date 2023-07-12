@@ -20,8 +20,6 @@ LockBox is an advanced password management application built to securely store a
 
 4.  Menu Navigation: While in the main menu, you can choose the desired option by entering the corresponding number (1-4) and pressing Enter. If you enter an invalid choice, an error message will be displayed, and you can try again.
 
-# User Experience (UX)
-
 ## Key Points
 
 ## Target Audience
@@ -29,6 +27,14 @@ LockBox is an advanced password management application built to securely store a
 ## User Stories
 
 # Data Model
+
+I have used a file-based data model provides a simple and portable approach to store and manage passwords.
+
+- User Account: Each user has a unique username associated with their account. The username is used to identify the user and retrieve their stored passwords.
+- Master Password: The user sets a master password during account creation. The master password is used to secure the user's account and protect access to their stored passwords.
+- Stored Passwords: For each user account, there is a file that stores the associated passwords. The passwords are stored in a key-value format, where the account name acts as the key and the corresponding password is the value.
+
+I also used termios and tty modules to manipulate the terminal so that I could display "\*" when the user types a password.
 
 ## Logicframe
 
