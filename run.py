@@ -4,16 +4,17 @@ import os
 import sys
 import tty
 import termios
+import hashlib
 
 PASSWORDS_DIR = "passwords/"
 
 
 def read_master_password(username):
     """
-    Read the master password for the specified username.
+    Read the master password hash for the specified username.
     """
     try:
-        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:  # noqa
+        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:
             return file.read().strip()
     except FileNotFoundError:
         return None
@@ -21,11 +22,19 @@ def read_master_password(username):
 
 def write_master_password(username, master_password):
     """
-    Write the master password for the specified username.
+    Write the hashed master password for the specified username.
     """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
+    hashed_password = hash_password(master_password)
     with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "w") as file:
-        file.write(master_password)
+        file.write(hashed_password)
+
+
+def hash_password(password):
+    """
+    Hash the given password using the SHA-256 algorithm.
+    """
+    return hashlib.sha256(password.encode()).hexdigest()
 
 
 def read_passwords(username):
@@ -295,18 +304,20 @@ def main():
     # Prompt the user to enter their username
     username = input("Enter your username: ")
 
-    # Read the stored master password for the username
-    master_password = read_master_password(username)
+    # Read the stored master password hash for the username
+    stored_master_password_hash = read_master_password(username)
 
-    if master_password is None:
+    if stored_master_password_hash is None:
         print("Invalid username. Exiting Password Manager. Goodbye!")
         return
 
     attempts = 0
     while attempts < 2:
-        # Prompt the user to enter their master password without displaying the input  # noqa
-        entered_password = get_password_from_user("Enter your master password: ")  # noqa
-        if entered_password == master_password:
+        # Prompt the user to enter their master password without displaying the input
+        entered_password = get_password_from_user("Enter your master password: ")
+        entered_password_hash = hash_password(entered_password)
+
+        if entered_password_hash == stored_master_password_hash:
             clear_terminal()  # Clear the terminal screen
             print("Login successful!\n")
             break
@@ -315,7 +326,7 @@ def main():
             attempts += 1
     else:
         print("You have entered the wrong password multiple times.")
-        choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
+        choice = input("Do you want to create a new master password and account? (y/n): ")
         if choice.lower() == "y":
             create_new_account()  # Create a new user account
         else:
