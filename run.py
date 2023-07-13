@@ -42,7 +42,7 @@ def read_master_password(username):
     If the master password file is not found, returns None.
     """
     try:
-        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:
+        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:  # noqa
             return file.read().strip()
     except FileNotFoundError:
         return None
@@ -50,7 +50,7 @@ def read_master_password(username):
 
 def write_master_password(username, master_password):
     """
-    Writes the hashed master password to the master password file for the given username.
+    Writes the hashed master password to the master password file for the given username.  # noqa
     """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     hashed_password = hash_password(master_password)
@@ -75,7 +75,7 @@ def read_passwords(username):
             encrypted_data = file.read()
             decrypted_data = decrypt_data(encrypted_data)
             lines = decrypted_data.splitlines()
-            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}
+            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}  # noqa
     except FileNotFoundError:
         return {}
 
@@ -86,7 +86,7 @@ def write_passwords(username, passwords):
     """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "wb") as file:
-        data = "\n".join([f"{account}: {password}" for account, password in passwords.items()])
+        data = "\n".join([f"{account}: {password}" for account, password in passwords.items()])  # noqa
         encrypted_data = encrypt_data(data)
         file.write(encrypted_data)
 
@@ -345,8 +345,8 @@ def main():
 
     attempts = 0
     while attempts < 2:
-        # Prompt the user to enter their master password without displaying the input
-        entered_password = get_password_from_user("Enter your master password: ")
+        # Prompt the user to enter their master password without displaying the input  # noqa
+        entered_password = get_password_from_user("Enter your master password: ")  # noqa
         entered_password_hash = hash_password(entered_password)
 
         if entered_password_hash == stored_master_password_hash:
@@ -358,7 +358,7 @@ def main():
             attempts += 1
     else:
         print("You have entered the wrong password multiple times.")
-        choice = input("Do you want to create a new master password and account? (y/n): ")
+        choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
         if choice.lower() == "y":
             create_new_account()  # Create a new user account
         else:
