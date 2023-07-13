@@ -5,13 +5,23 @@ import sys
 import tty
 import termios
 import hashlib
+from cryptography.fernet import Fernet
 
 PASSWORDS_DIR = "passwords/"
+key = Fernet.generate_key()
+
+
+def generate_key():
+    """
+    Generates a new encryption key using Fernet.
+    """
+    return Fernet.generate_key()
 
 
 def read_master_password(username):
     """
-    Read the master password hash for the specified username.
+    Reads and returns the master password for the given username.
+    If the master password file is not found, returns None.
     """
     try:
         with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:
@@ -22,7 +32,7 @@ def read_master_password(username):
 
 def write_master_password(username, master_password):
     """
-    Write the hashed master password for the specified username.
+    Writes the hashed master password to the master password file for the given username.
     """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     hashed_password = hash_password(master_password)
@@ -32,36 +42,40 @@ def write_master_password(username, master_password):
 
 def hash_password(password):
     """
-    Hash the given password using the SHA-256 algorithm.
+    Hashes the provided password using SHA-256 algorithm.
     """
     return hashlib.sha256(password.encode()).hexdigest()
 
 
 def read_passwords(username):
     """
-    Read the stored passwords for the specified username.
+    Reads and returns the stored passwords for the given username.
+    If the passwords file is not found, returns an empty dictionary.
     """
     try:
-        with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "r") as file:
-            lines = file.readlines()
-            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}  # noqa
+        with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "rb") as file:
+            encrypted_data = file.read()
+            decrypted_data = decrypt_data(encrypted_data)
+            lines = decrypted_data.splitlines()
+            return {line.split(":")[0].strip(): line.split(":")[1].strip() for line in lines}
     except FileNotFoundError:
         return {}
 
 
 def write_passwords(username, passwords):
     """
-    Write the provided passwords for the specified username.
+    Writes the provided passwords to the passwords file for the given username.
     """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
-    with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "w") as file:
-        for account, password in passwords.items():
-            file.write(f"{account}: {password}\n")
+    with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "wb") as file:
+        data = "\n".join([f"{account}: {password}" for account, password in passwords.items()])
+        encrypted_data = encrypt_data(data)
+        file.write(encrypted_data)
 
 
 def get_password_from_user(prompt="Enter password: "):
     """
-    Prompt the user to enter a password without displaying the input, display "*".  # noqa
+    Prompts the user to enter a password securely.
     """
     while True:
         password = ""
@@ -105,7 +119,7 @@ def get_password_from_user(prompt="Enter password: "):
 
 def generate_random_password(length=12):
     """
-    Generate a random password of the specified length.
+    Generates a random password with the specified length.
     """
     characters = string.ascii_letters + string.digits + string.punctuation
     return "".join(random.choice(characters) for _ in range(length))
@@ -113,7 +127,7 @@ def generate_random_password(length=12):
 
 def display_passwords(username, passwords):
     """
-    Display the stored passwords for the specified username.
+    Displays the stored passwords for the given username.
     """
     print(f"Stored Passwords for user '{username}':")
     print()
@@ -129,7 +143,7 @@ def display_passwords(username, passwords):
 
 def add_password(username):
     """
-    Add a new password for the specified username and account.
+    Adds a new password for the given username and account.
     """
     account = input("Enter the site name associated with this password: ")
     password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")  # noqa
@@ -164,7 +178,7 @@ def add_password(username):
 
 def remove_password(username):
     """
-    Remove the password for the specified username and account.
+    Removes a password for the given username and account.
     """
     account = input("Enter the account name: ")
     passwords = read_passwords(username)
@@ -178,14 +192,14 @@ def remove_password(username):
 
 def clear_terminal():
     """
-    Clear the terminal.
+    Clears the terminal screen.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def create_new_account():
     """
-    Create a new user account.
+    Creates a new user account and sets a master password.
     """
     clear_terminal()  # Clear the terminal screen
 
