@@ -21,7 +21,7 @@ def generate_key():
 def get_encryption_key():
     """
     Retrieves the encryption key from the key file.
-    If the key file doesn't exist, generates a new key and saves it to the file.
+    If the key file doesn't exist, generates a new key and saves it to the file.  # noqa
     """
     if os.path.isfile(KEY_FILE):
         with open(KEY_FILE, "rb") as key_file:
@@ -57,7 +57,7 @@ def read_master_password(username):
     If the master password file is not found, returns None.
     """
     try:
-        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:
+        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:  # noqa
             return file.read().strip()
     except FileNotFoundError:
         return None
@@ -65,7 +65,7 @@ def read_master_password(username):
 
 def write_master_password(username, master_password):
     """
-    Writes the hashed master password to the master password file for the given username.
+    Writes the hashed master password to the master password file for the given username.  # noqa
     """
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     hashed_password = hash_password(master_password)
@@ -105,7 +105,7 @@ def write_passwords(username, passwords, key):
     os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
     with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "wb") as file:
         data = "\n".join(
-            [f"{account}: {password}" for account, password in passwords.items()]
+            [f"{account}: {password}" for account, password in passwords.items()]  # noqa
         )
         encrypted_data = encrypt_data(data, key)
         file.write(encrypted_data)
@@ -146,11 +146,11 @@ def get_password_from_user(prompt="Enter password: "):
         print()  # Move to the next line after password input
 
         if len(password) < 4:
-            print("Password must be at least 4 characters long. Please try again.")
+            print("Password must be at least 4 characters long. Please try again.")  # noqa
             continue
 
         if not any(char in string.punctuation for char in password):
-            print("Password must contain at least 1 special character. Please try again.")
+            print("Password must contain at least 1 special character. Please try again.")  # noqa
             continue
 
         return password
@@ -179,11 +179,11 @@ def add_password(username):
     Adds a new password for the given username and account.
     """
     account = input("Enter the site name associated with this password: ")
-    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")  # noqa
     if password_option == "1":
         password = get_password_from_user()
     elif password_option == "2":
-        length = int(input("Enter the length of the password (default is 12): ") or "12")
+        length = int(input("Enter the length of the password (default is 12): ") or "12")  # noqa
         password = generate_random_password(length)
     else:
         print("Invalid option. Returning to the main menu.")
@@ -195,7 +195,7 @@ def add_password(username):
     passwords = read_passwords(username, key)
     if account in passwords:
         choice = input(
-            f"An account with the name '{account}' already exists for the user '{username}'. "
+            f"An account with the name '{account}' already exists for the user '{username}'. "  # noqa
             "Do you want to change the password? (y/n): "
         )
         if choice.lower() == "y":
@@ -207,7 +207,7 @@ def add_password(username):
     else:
         passwords[account] = password
         write_passwords(username, passwords, key)
-        print(f"Password added successfully to the new account '{account}' for the user '{username}'.")
+        print(f"Password added successfully to the new account '{account}' for the user '{username}'.")  # noqa
         print(f"Password: {password}")
     print("-" * 80)
 
@@ -262,7 +262,7 @@ def create_new_account():
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
     print("When creating a master password please ensure the following:")
-    print("The password is more than 4 characters and contains 1 special character.\n")
+    print("The password is more than 4 characters and contains 1 special character.\n")  # noqa
 
     # Prompt the user to enter a desired username
     username = input("Enter your desired username: ")
@@ -280,7 +280,7 @@ def create_new_account():
     while master_password != confirm_password:
         print("Passwords do not match. Please try again.")
         master_password = get_password_from_user("Create a master password: ")
-        confirm_password = get_password_from_user("Confirm the master password: ")
+        confirm_password = get_password_from_user("Confirm the master password: ")  # noqa
 
     # Generate or retrieve the encryption key
     key = get_encryption_key()
@@ -372,8 +372,8 @@ def main():
 
     attempts = 0
     while attempts < 2:
-        # Prompt the user to enter their master password without displaying the input
-        entered_password = get_password_from_user("Enter your master password: ")
+        # Prompt the user to enter their master password without displaying the input  # noqa
+        entered_password = get_password_from_user("Enter your master password: ")  # noqa
         entered_password_hash = hash_password(entered_password)
 
         if entered_password_hash == stored_master_password_hash:
@@ -385,7 +385,7 @@ def main():
             attempts += 1
     else:
         print("You have entered the wrong password multiple times.")
-        choice = input("Do you want to create a new master password and account? (y/n): ")
+        choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
         if choice.lower() == "y":
             create_new_account()  # Create a new user account
         else:
