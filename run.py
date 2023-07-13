@@ -18,6 +18,24 @@ def generate_key():
     return Fernet.generate_key()
 
 
+def encrypt_data(data):
+    """
+    Encrypts the provided data using the encryption key.
+    """
+    cipher_suite = Fernet(key)
+    encrypted_data = cipher_suite.encrypt(data.encode())
+    return encrypted_data
+
+
+def decrypt_data(encrypted_data):
+    """
+    Decrypts the provided encrypted data using the encryption key.
+    """
+    cipher_suite = Fernet(key)
+    decrypted_data = cipher_suite.decrypt(encrypted_data).decode()
+    return decrypted_data
+
+
 def read_master_password(username):
     """
     Reads and returns the master password for the given username.
