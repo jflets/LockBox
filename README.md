@@ -38,7 +38,7 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 ## Logic Map
 
-![Logic Map](/assets/images/lock-box-logic-map.png)
+![Logic Map](/assets/images/lock-box-logic-map2.png)
 
 # Features
 
