@@ -183,7 +183,7 @@ def add_password(username):
     if password_option == "1":
         password = get_password_from_user()
     elif password_option == "2":
-        length = int(input("Enter the length of the password (default is 12): ") or "12")  # noqa
+        length = int(input("Enter the length of the password (max is 14): ") or "14")  # noqa
         password = generate_random_password(length)
     else:
         print("Invalid option. Returning to the main menu.")
@@ -358,6 +358,10 @@ def main():
     print("This program allows you to manage your passwords securely.")
 
     new_user = input("Are you a new user? (y/n): ")
+    while new_user.lower() not in ["y", "n"]:
+        print("Invalid option. Please enter 'y' or 'n'.")
+        new_user = input("Are you a new user? (y/n): ")
+
     if new_user.lower() == "y":
         create_new_account()  # Create a new user account
         return
@@ -388,6 +392,10 @@ def main():
     else:
         print("You have entered the wrong password multiple times.")
         choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
+        while choice.lower() not in ["y", "n"]:
+            print("Invalid option. Please enter 'y' or 'n'.")
+            choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
+
         if choice.lower() == "y":
             create_new_account()  # Create a new user account
         else:
