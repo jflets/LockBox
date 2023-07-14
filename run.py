@@ -237,10 +237,11 @@ def clear_terminal():
 
 def generate_random_password(length=12):
     """
-    Generates a random password with the specified length.
+    Generates a random password with the specified length, up to a maximum of 14.
     """
+    max_length = min(length, 14)  # Limit the maximum password length to 14
     characters = string.ascii_letters + string.digits + string.punctuation
-    return "".join(random.choice(characters) for _ in range(length))
+    return "".join(random.choice(characters) for _ in range(max_length))
 
 
 def create_new_account():
