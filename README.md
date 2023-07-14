@@ -78,17 +78,33 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 ## Features Left to Implement
 
-- Enhance the application by incorporating a password strength analysis feature.
-- Expand the password generation functionality by allowing users to customize the generated passwords according to their preferences.
-- Implement support for two-factor authentication as an additional layer of security for user accounts.
+- Password Strength Analysis
+  - Enhance the application by incorporating a password strength analysis feature.
+- Password Generator Customization
+  - Expand the password generation functionality by allowing users to customize the generated passwords according to their preferences.
+- Two-Factor Authentication (2FA)
+  - Implement support for two-factor authentication as an additional layer of security for user accounts.
 
 # Technologies Used
 
+Python
+
 # Frameworks, Libraries and Programs Used
+
+Git - For version control.
+
+Github - To save and share files for the site.
+
+VScode - IDE used to code the site.
+
+Cryptography - For encrypting and decrypting data.
 
 # Testing
 
 ## Validator Testing
+
+- Python
+  - No errors or warnings where returned when using the [Pep8ci Validator](https://pep8ci.herokuapp.com/#)
 
 ## Solved Bugs
 
