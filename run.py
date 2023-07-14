@@ -218,10 +218,11 @@ def remove_password(username):
     Removes a password for the given username and account.
     """
     account = input("Enter the account name: ")
-    passwords = read_passwords(username)
+    key = get_encryption_key()
+    passwords = read_passwords(username, key)
     if account in passwords:
         del passwords[account]
-        write_passwords(username, passwords)
+        write_passwords(username, passwords, key)
         print(f"Password for account '{account}' removed successfully.")
     else:
         print(f"No password found for account '{account}'.")
