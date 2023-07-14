@@ -20,9 +20,7 @@ LockBox is an advanced password management application built to securely store a
 
 4.  Menu Navigation: While in the main menu, you can choose the desired option by entering the corresponding number (1-4) and pressing Enter. If you enter an invalid choice, an error message will be displayed, and you can try again.
 
-## Key Points
-
-## Target Audience
+# Target Audience
 
 ## User Stories
 
@@ -57,6 +55,7 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 ## User Account Creation
 
 - The application allows new users to create an account by providing a unique username and a master password. The master password is used to secure the account and protect access to the stored passwords.
+  [Creating New Account](/assets/video/python-terminal-new-user.mp4)
 
 ## Login and Authentication
 
@@ -120,7 +119,25 @@ Cryptography - For encrypting and decrypting data.
 - Python
   - No errors or warnings where returned when using the [Pep8ci Validator](https://pep8ci.herokuapp.com/#)
 
+There are some lines of code that exceed the Pep8 recommended 79 character limit but, changing these lines will effect the functionality of the program. To make sure the Pep8 linter ignores the longer lines i have used # noqa.
+
 ## Solved Bugs
+
+1.  When an exiting user logged in and tried to display their passwords, and error would occur "cryptography.fernet.InvalidToken" . The issue was with the decryption process of the stored passwords. Specifically encrypted data had an invalid signature.
+
+- To solve the issue I added error handling for exceptions raised during encryption, decryption, and file operations.
+
+2.  Then when running the program again and selection the option to display passwords the user received the following error "Invalid password data. Failed to decrypt."
+
+    - To solve this new issue I realized I had not added a function to generate an encryption key, once I added this and made sure that the encryption key was generated and used consistently, the program displayed the user passwords correctly.
+
+3.  I was receiving an error when creating a new account and master password. This because I had forgotten to add the new key perimeter to multiple functions cause an error when running the program.
+
+- To fix this I added the necessary key perimeter to the functions that where missing this.
+
+## Bugs
+
+No bugs found.
 
 ## Full Testing
 
@@ -130,4 +147,4 @@ Cryptography - For encrypting and decrypting data.
 
 # Credits
 
-## Content
+## Inspiration
