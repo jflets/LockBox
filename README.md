@@ -55,7 +55,6 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 ## User Account Creation
 
 - The application allows new users to create an account by providing a unique username and a master password. The master password is used to secure the account and protect access to the stored passwords.
-  [Creating New Account](/assets/video/python-terminal-new-user.mp4)
 
 ## Login and Authentication
 
@@ -134,6 +133,14 @@ There are some lines of code that exceed the Pep8 recommended 79 character limit
 3.  I was receiving an error when creating a new account and master password. This because I had forgotten to add the new key perimeter to multiple functions cause an error when running the program.
 
 - To fix this I added the necessary key perimeter to the functions that where missing this.
+
+4. When generating a random password the user is asked to input a password length, the user could put any number and the function would return "+0".
+
+- To fix this I added a max password length of 14 characters. Now if a user inputs a password length over 14 the function generates a password with the max length of 14 characters.
+
+5. When loading the program the user is prompted, asking if they are a new user y/n. If the user entered any key that was not "n" the system would proceed as if the user selected "y".
+
+- To fix this I added validation so that if any keys other that "y/n" are entered the system alerts the user of an invalid input and asks the original prompt.
 
 ## Bugs
 
