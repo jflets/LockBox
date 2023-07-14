@@ -26,6 +26,18 @@ LockBox is an advanced password management application built to securely store a
 
 ## User Stories
 
+1.  New User:
+
+- As a new user, I want to create a secure account with a unique username and master password. I want to be guided through the process of setting up my account and master password, ensuring that my password meets the required criteria. Once my account is set up, I want to be able to add and manage my passwords easily.
+
+2. Returning User:
+
+- As a returning user, I want to be able to log in to my existing account using my username and master password. I expect the application to validate my credentials and provide access to my stored passwords securely. I want to be able to view and manage my passwords, including adding new passwords, removing outdated ones, and updating existing ones.
+
+3. Frequent User:
+
+- As a frequent user, I rely on LockBox to securely store and manage my passwords. I value its quick login, organized display of passwords, and features like adding, removing, and updating passwords. The password generator adds extra security. LockBox streamlines password management and protects my sensitive information.
+
 # Data Model
 
 I have used a file-based data model provides a simple and portable approach to store and manage passwords.
