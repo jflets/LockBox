@@ -90,14 +90,14 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 - The application presents users with a menu-based navigation system. Users can choose different options from the menu to perform specific actions, such as displaying passwords, adding passwords, removing passwords, updating the master password, and quitting the application.
 
-## Features Left to Implement
+## Features Left to Add
 
-- Password Strength Analysis
-  - Enhance the application by incorporating a password strength analysis feature.
+- Password Strength Checker
+  - Improve the application by adding a password strength check feature.
 - Password Generator Customization
-  - Expand the password generation functionality by allowing users to customize the generated passwords according to their preferences.
+  - Expand the password generator to allow the users to customize the generated passwords to their preferences.
 - Two-Factor Authentication (2FA)
-  - Implement support for two-factor authentication as an additional layer of security for user accounts.
+  - Add support for two-factor authentication as an additional layer of security for user accounts.
 
 # Technologies Used
 
