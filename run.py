@@ -269,6 +269,10 @@ def create_new_account():
     # Prompt the user to enter a desired username
     username = input("Enter your desired username: ")
 
+    while not username.strip():
+        print("Username cannot be blank. Please try again.")
+        username = input("Enter your desired username: ")
+
     if os.path.isfile(f"{PASSWORDS_DIR}{username}/{username}.txt"):
         print("Username already exists. Please choose a different username.")
         return
