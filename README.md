@@ -36,7 +36,9 @@ I have used a file-based data model provides a simple and portable approach to s
 
 I also used termios and tty modules to manipulate the terminal so that I could display "\*" when the user types a password.
 
-## Logicframe
+## Logic Map
+
+![Logic Map](/assets/images/lock-box-logic-map.png)
 
 # Features
 
