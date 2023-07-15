@@ -128,7 +128,7 @@ There are some lines of code that exceed the Pep8 recommended 79 character limit
 
 2.  Then when running the program again and selection the option to display passwords the user received the following error "Invalid password data. Failed to decrypt."
 
-    - To solve this new issue I realized I had not added a function to generate an encryption key, once I added this and made sure that the encryption key was generated and used consistently, the program displayed the user passwords correctly.
+- To solve this new issue I realized I had not added a function to generate an encryption key, once I added this and made sure that the encryption key was generated and used consistently, the program displayed the user passwords correctly.
 
 3.  I was receiving an error when creating a new account and master password. This because I had forgotten to add the new key perimeter to multiple functions cause an error when running the program.
 
@@ -141,6 +141,10 @@ There are some lines of code that exceed the Pep8 recommended 79 character limit
 5. When loading the program the user is prompted, asking if they are a new user y/n. If the user entered any key that was not "n" the system would proceed as if the user selected "y".
 
 - To fix this I added validation so that if any keys other that "y/n" are entered the system alerts the user of an invalid input and asks the original prompt.
+
+6. When a users was entering a password, if the "backspaced" the system would take this a s a key entry as part of the password.
+
+- To fix this I added and elif statement to the get_user_password function, so that when backspace is pressed it minuses 1 character. I then added an sys.stdout.write to remove the the asterisk displayed on the screen.
 
 ## Bugs
 
