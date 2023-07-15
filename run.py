@@ -171,13 +171,15 @@ def display_passwords(username, passwords):
     """
     print(f"Stored Passwords for user '{username}':")
     print()
-    if passwords:
-        for account, password in passwords.items():
-            print(f"Account: {account}")
-            print(f"Password: {password}")
-            print("-" * 80)
-    else:
+    # Check if passwords dictionary is empty or contains only the master password
+    if not passwords or all(account == username for account in passwords):
         print("No passwords stored for this user.")
+    else:
+        for account, password in passwords.items():
+            if account != username:  # Exclude master password from display
+                print(f"Account: {account}")
+                print(f"Password: {password}")
+                print("-" * 80)
     print("-" * 80)
 
 
