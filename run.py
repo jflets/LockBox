@@ -247,8 +247,12 @@ def clear_terminal():
 
 def generate_random_password(length=12):
     """
-    Generates a random password with the specified length, up to a maximum of 14.
+    Generates a random password with the specified length, enforcing a minimum length of 8 characters.
     """
+    if length < 8:
+        print("Minimum password length is 8 characters. Setting length to 8.")
+        length = 8
+
     max_length = min(length, 14)  # Limit the maximum password length to 14
     characters = string.ascii_letters + string.digits + string.punctuation
     return "".join(random.choice(characters) for _ in range(max_length))
