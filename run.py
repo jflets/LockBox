@@ -126,14 +126,21 @@ def get_password_from_user(prompt="Enter password: "):
         tty.setraw(fd)
 
         try:
-            print(prompt, end="", flush=True)
+            sys.stdout.write(prompt)
+            sys.stdout.flush()
             while True:
                 char = sys.stdin.read(1)
                 if char == "\r" or char == "\n":
-                    print()
                     break
                 elif char == "\x03":  # Handle Ctrl+C
                     raise KeyboardInterrupt
+                elif char == "\x7f":  # Handle backspace
+                    if len(password) > 0:
+                        # Erase the last character from the password
+                        password = password[:-1]
+                        # Erase the asterisk displayed on the screen
+                        sys.stdout.write("\b \b")
+                        sys.stdout.flush()
                 else:
                     password += char
                     sys.stdout.write("*")
@@ -143,14 +150,15 @@ def get_password_from_user(prompt="Enter password: "):
             # Restore terminal settings
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
-        print()  # Move to the next line after password input
+        sys.stdout.write("\n")  # Move to the next line after password input
+        sys.stdout.flush()
 
         if len(password) < 4:
-            print("Password must be at least 4 characters long. Please try again.")  # noqa
+            print("Password must be at least 4 characters long. Please try again.")
             continue
 
         if not any(char in string.punctuation for char in password):
-            print("Password must contain at least 1 special character. Please try again.")  # noqa
+            print("Password must contain at least 1 special character. Please try again.")
             continue
 
         return password
