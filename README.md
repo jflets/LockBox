@@ -82,17 +82,20 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 - The user can remove a password from their account by specifying the account name. The application locates the corresponding password and removes it from the stored passwords.
 
-## Master Password Update
-
-- Users have the option to update their master password. They can choose to change their existing master password to enhance security. The application prompts them to enter the current master password for verification and then allows them to set a new master password.
+  ![Remove password](assets/images/remove-password.gif)
 
 ## Encryption and Security
 
 - The user's master password is securely stored using encryption techniques. This ensures that the master password cannot be easily accessed or compromised. Additionally, the application enforces certain password requirements and provides validation to enhance the security of stored passwords.
 
+- I have used (import hashlib) and
+  (from cryptography.fernet import Fernet) to encrypt the data.
+
 ## Error Handling
 
 - The application handles various error scenarios gracefully, such as invalid input, incorrect passwords, non-existing accounts, and file access errors. It provides informative error messages to guide users and ensure a smooth user experience.
+
+  ![Error handling](assets/images/error-handling.gif)
 
 ## Menu-based Navigation
 
