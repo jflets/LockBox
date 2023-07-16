@@ -114,6 +114,14 @@ VScode - IDE used to code the site.
 
 Cryptography - For encrypting and decrypting data.
 
+[Cloud Convert](https://cloudconvert.com) - Converting videos to gif.
+
+[Techsini](https://techsini.com) - For generating mockups.
+
+[Clideo](https://clideo.com/resize-video) - For resizing screen recorded videos.
+
+[Loom](https://www.loom.com) - For screen recording.
+
 # Testing
 
 ## Validator Testing
