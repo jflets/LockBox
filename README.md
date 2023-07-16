@@ -262,10 +262,18 @@ To clone the repository:
 
 The inspiration for this password manager acme from youtube.
 
-[NuralNine](https://youtu.be/O8596GPSJV4) - Gave me an understanding of how to go about setting up the password manager.
+[NuralNine](https://youtu.be/O8596GPSJV4) - Gave me an understanding of how to go about setting up the password manager and how to encrypt data using Cryptography.
+
+[NuralNine](https://youtu.be/nqkkW0fZRWM) - Gave me an idea of how to hide passwords while a user is typing and how to display asterisks.
+
+[NuralNine](https://youtu.be/i-h0CtKde6w) - Showed me how to use hashlib to has master password.
 
 [Halledn](https://youtu.be/hkhyKJj28Ac) - Gave me an idea of logic for the password manager.
 
 [Tech Raj](https://youtu.be/KQjf9get6PE) - Gave me more ideas on how to set up th password manager.
 
 ## Code
+
+[Oreilly](https://www.oreilly.com/library/view/python-standard-library/0596000960/ch12s07.html) - Showed me how to use the termios module.
+
+[anthonywritescode](https://youtu.be/SYwbEcNrcjI) - Showed me what tty is and how to use it.
