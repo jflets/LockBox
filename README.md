@@ -258,9 +258,11 @@ To clone the repository:
 
 # Credits
 
+[Code Institute](https://codeinstitute.net) - For deployment terminal.
+
 ## Inspiration
 
-The inspiration for this password manager acme from youtube.
+The inspiration for this password manager came from youtube.
 
 [NuralNine](https://youtu.be/O8596GPSJV4) - Gave me an understanding of how to go about setting up the password manager and how to encrypt data using Cryptography.
 
