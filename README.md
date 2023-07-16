@@ -138,6 +138,8 @@ Cryptography - For encrypting and decrypting data.
 
 [Tables Generator](https://www.tablesgenerator.com) - Used to generate tables for README file.
 
+[Lucidchart](https://lucid.app) - Used for logic map.
+
 # Testing
 
 ## Validator Testing
