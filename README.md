@@ -2,6 +2,8 @@
 
 LockBox is an advanced password management application built to securely store and organize your sensitive information. With its user-friendly command-line interface, LockBox ensures convenient access to your passwords while employing robust encryption algorithms to safeguard your data from unauthorized access. The application allows you to generate strong and unique passwords, eliminating the need to remember complex combinations. By adhering to best security practices, LockBox provides a secure environment for managing your passwords, ensuring the protection of your online accounts. Experience the convenience and peace of mind that LockBox brings, offering a reliable and efficient solution for your password management needs.
 
+Click here to load [LockBox]()
+
 ![Mockup](assets/images/mockup.png)
 
 # How to use
@@ -134,6 +136,8 @@ Cryptography - For encrypting and decrypting data.
 
 [Loom](https://www.loom.com) - For screen recording.
 
+[Tables Generator](https://www.tablesgenerator.com/markdown_tables#) - Used to generate tables for README file.
+
 # Testing
 
 ## Validator Testing
@@ -183,7 +187,34 @@ There are some lines of code that exceed the Pep8 recommended 79 character limit
 
 No bugs found.
 
-## Full Testing
+# Full Testing
+
+## Create new account and login
+
+| **Feature**                                            | **Expected Outcome**                                                                                 | **Testing Performed**                            | **Result**                                                               | **Pass/Fail** |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------ | ------------- |
+| Create new account y/n prompt "y"                      | Load create new account sequence                                                                     | Entered "y"                                      | Loads create new account sequence                                        | Pass          |
+| Create new account y/n prompt "n"                      | Ask user for username and master password                                                            | Entered "n"                                      | Asked for username and master password                                   | Pass          |
+| Create new account "enter username"                    | Allow user to enter a username                                                                       | Entered a username                               | Allowed me to enter my username                                          | Pass          |
+| Create new account "enter master password"             | Ask user to enter master password and display asterisk "\*"                                          | Entered a master password                        | Allowed me to enter master password and displayed asterisks while typing | Pass          |
+| Create new account "confirm master password" correct   | Ask the user to confirm their master password and check if they match                                | Re-entered master password                       | Master password was successfully confirmed                               | Pass          |
+| Create new account "confirm master password" incorrect | If passwords do not match prompt the user and ask them to try again                                  | Re-entered wrong master password                 | Prompted the the passwords do not match and to try entering again        | Pass          |
+| Login after new account created, "valid account"       | Prompt user to enter username and master password they just made and check if the account is valid   | Entered username and master password             | Logged in successfully                                                   | Pass          |
+| Login after new account created, "invalid account"     | Prompt user that the account name entered is invalid, ask if user would like to create a new account | Entered invalid account name and master password | Prompted to create new account                                           | Pass          |
+
+---
+
+## Menu navigation
+
+| **Feature**                                                            | **Expected Outcome**                                                                     | **Testing Performed** | **Result**                                                                      | **Pass/Fail** |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------- | ------------- |
+| Menu navigation                                                        | Load menu after login                                                                    | Logged in             | Menu navigation was loaded                                                      | Pass          |
+| Menu navigation option 1 "display passwords" (passwords in account)    | Load user passwords and display the site associated                                      | Selected option 1     | Displayed passwords and associated site                                         | Pass          |
+| Menu navigation option 1 "display passwords" (no passwords in account) | Prompt user that there are no passwords stored for that account                          | Selected option 1     | Prompted that no passwords are stored for my account                            | Pass          |
+| Menu navigation option 2 "add password" (enter password manually)      | Prompt user for the associated site then allow user to manually enter password           | Selected option 2     | Prompted to enter associated site then allowed to enter password                | Pass          |
+| Menu navigation option 2 "add password" (generate random password)     | Prompt user for the associated site then prompt user to select length of random password | Selected option 2     | Prompted to enter associated site then asked to enter a desired password length | Pass          |
+| Menu navigation option 3 "remove password"                             | Ask user associated site name of the password they want to remove, then remove password  | Select option 3       | Asked for associated site name for password to be removed                       | Pass          |
+| Menu navigation option 4 "quite"                                       | Quite program and display goodbye message                                                | Select option 4       | Program quite and displayed goodbye message                                     | Pass          |
 
 # Deployment
 
