@@ -2,6 +2,8 @@
 
 LockBox is an advanced password management application built to securely store and organize your sensitive information. With its user-friendly command-line interface, LockBox ensures convenient access to your passwords while employing robust encryption algorithms to safeguard your data from unauthorized access. The application allows you to generate strong and unique passwords, eliminating the need to remember complex combinations. By adhering to best security practices, LockBox provides a secure environment for managing your passwords, ensuring the protection of your online accounts. Experience the convenience and peace of mind that LockBox brings, offering a reliable and efficient solution for your password management needs.
 
+![Mockup](assets/images/mockup.png)
+
 # How to use
 
 1.  Existing User Login: If you are an existing user, you will be prompted to enter your username. After entering your username, you will be asked to provide your master password. Enter your master password without displaying the input. If the entered master password matches the stored master password, you will be logged in successfully.
@@ -55,6 +57,7 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 ## User Account Creation
 
 - The application allows new users to create an account by providing a unique username and a master password. The master password is used to secure the account and protect access to the stored passwords.
+  ![New account creation](assets/images/python-terminal-new-user.gif)
 
 ## Login and Authentication
 
