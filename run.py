@@ -154,11 +154,11 @@ def get_password_from_user(prompt="Enter password: "):
         sys.stdout.flush()
 
         if len(password) < 4:
-            print("Password must be at least 4 characters long. Please try again.")
+            print("Password must be at least 4 characters long. Please try again.")  # noqa
             continue
 
         if not any(char in string.punctuation for char in password):
-            print("Password must contain at least 1 special character. Please try again.")
+            print("Password must contain at least 1 special character. Please try again.")  # noqa
             continue
 
         return password
@@ -171,7 +171,7 @@ def display_passwords(username, passwords):
     """
     print(f"Stored Passwords for user '{username}':")
     print()
-    # Check if passwords dictionary is empty or contains only the master password
+    # Check if passwords dictionary is empty or contains only the master password  # noqa
     if not passwords or all(account == username for account in passwords):
         print("No passwords stored for this user.")
     else:
@@ -247,7 +247,7 @@ def clear_terminal():
 
 def generate_random_password(length=12):
     """
-    Generates a random password with the specified length, enforcing a minimum length of 8 characters.
+    Generates a random password with the specified length, enforcing a minimum length of 8 characters.  # noqa
     """
     if length < 8:
         print("Minimum password length is 8 characters. Setting length to 8.")
