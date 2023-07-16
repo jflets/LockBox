@@ -101,6 +101,8 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 - The application presents users with a menu-based navigation system. Users can choose different options from the menu to perform specific actions, such as displaying passwords, adding passwords, removing passwords, updating the master password, and quitting the application.
 
+  ![Navigation menu](assets/images/navigation-menu.png)
+
 ## Features Left to Add
 
 - Password Strength Checker
@@ -121,6 +123,8 @@ Git - For version control.
 Github - To save and share files for the site.
 
 VScode - IDE used to code the site.
+
+[Heroku](https://heroku.com) - Site used for deployment.
 
 Cryptography - For encrypting and decrypting data.
 
