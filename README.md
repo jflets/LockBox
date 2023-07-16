@@ -70,9 +70,13 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 - Once logged in, the user can view a list of their stored passwords. The application retrieves the passwords associated with the user's account and displays them, showing the account name and the corresponding password.
 
+  ![Display passwords](assets/images/display-passwords.gif)
+
 ## Add New Password
 
 - The user can add a new password to their account. They provide the account name and choose either to enter the password manually or generate a random password. If manually entered, the password is validated to meet certain criteria (e.g., minimum length and containing at least one special character). The new password is then stored securely in the user's account.
+
+  ![Add new password](assets/images/add-new-password.gif)
 
 ## Remove Password
 
