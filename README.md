@@ -12,13 +12,13 @@ LockBox is an advanced password management application built to securely store a
 
 3.  Main Menu: After logging in or creating a new account, you will be presented with the main menu. The main menu allows you to perform various actions:
 
-- Display Passwords (Option 1): Choose this option to display all the stored passwords associated with your account. If there are no passwords stored, a message will be displayed indicating that there are no passwords stored for your account.
+    - Display Passwords (Option 1): Choose this option to display all the stored passwords associated with your account. If there are no passwords stored, a message will be displayed indicating that there are no passwords stored for your account.
 
-- Add Password (Option 2): Use this option to add a new password for an account. You will be prompted to enter the site or account name and choose an option to either enter the password manually or generate a random password. If you choose to enter the password manually, you need to follow the password requirements (minimum length of 4 characters and at least 1 special character). If you choose to generate a random password, you can specify the length or use the default length of 12 characters. The password will be added to your account's stored passwords.
+    - Add Password (Option 2): Use this option to add a new password for an account. You will be prompted to enter the site or account name and choose an option to either enter the password manually or generate a random password. If you choose to enter the password manually, you need to follow the password requirements (minimum length of 4 characters and at least 1 special character). If you choose to generate a random password, you can specify the length or use the default length of 12 characters. The password will be added to your account's stored passwords.
 
-- Remove Password (Option 3): Select this option to remove a password from your account. You will be prompted to enter the account name associated with the password you want to remove. If the account exists in your stored passwords, it will be removed.
+    - Remove Password (Option 3): Select this option to remove a password from your account. You will be prompted to enter the account name associated with the password you want to remove. If the account exists in your stored passwords, it will be removed.
 
-- Quit (Option 4): Choose this option to exit the application. It will terminate the program and display a goodbye message.
+    - Quit (Option 4): Choose this option to exit the application. It will terminate the program and display a goodbye message.
 
 4.  Menu Navigation: While in the main menu, you can choose the desired option by entering the corresponding number (1-4) and pressing Enter. If you enter an invalid choice, an error message will be displayed, and you can try again.
 
@@ -187,8 +187,46 @@ No bugs found.
 
 # Deployment
 
+The application as been deployed to [Heroku](https://heroku.com).
+
+1. Open the Heroku Dashboard and click on "Create new app".
+
+2. Fill in the app name and select the region (e.g., Europe). Click "Create app".
+
+3. In the "Settings" section, click on "Add buildpack" and add the Python and Node.js buildpacks in that order.
+
+4. In the "Config Vars" section, click on "Reveal Config Vars" and add any necessary environment variables for your application.
+
+5. Under "Deployment method", select GitHub and connect your repository.
+
+6. Enable Automatic Deploys if desired and click "Deploy Branch".
+
 ## Local Development
+
+How to Fork To fork the repository:
+
+- Log in (or sign up) to Github.
+
+- Go to the repository for this project, [LockBox](https://github.com/jflets/LockBox)
+
+- Click the Fork button in the top right corner.
+
+- How to Clone
+
+To clone the repository:
+
+- Log in (or sign up) to GitHub.
+
+- Go to the repository for this project, [LockBox](https://github.com/jflets/LockBox)
+
+- Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+
+- Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+
+- Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
 
 # Credits
 
 ## Inspiration
+
+## Code
