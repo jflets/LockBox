@@ -2,7 +2,7 @@
 
 LockBox is an advanced password management application built to securely store and organize your sensitive information. With its user-friendly command-line interface, LockBox ensures convenient access to your passwords while employing robust encryption algorithms to safeguard your data from unauthorized access. The application allows you to generate strong and unique passwords, eliminating the need to remember complex combinations. By adhering to best security practices, LockBox provides a secure environment for managing your passwords, ensuring the protection of your online accounts. Experience the convenience and peace of mind that LockBox brings, offering a reliable and efficient solution for your password management needs.
 
-Click here to load [LockBox]()
+Click here to load [LockBox](https://lockbox-0538d34db4b9.herokuapp.com)
 
 ![Mockup](assets/images/mockup.png)
 
@@ -136,7 +136,7 @@ Cryptography - For encrypting and decrypting data.
 
 [Loom](https://www.loom.com) - For screen recording.
 
-[Tables Generator](https://www.tablesgenerator.com/markdown_tables#) - Used to generate tables for README file.
+[Tables Generator](https://www.tablesgenerator.com) - Used to generate tables for README file.
 
 # Testing
 
