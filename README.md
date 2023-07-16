@@ -57,11 +57,14 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 ## User Account Creation
 
 - The application allows new users to create an account by providing a unique username and a master password. The master password is used to secure the account and protect access to the stored passwords.
-  ![New account creation](assets/images/python-terminal-new-user.gif)
+
+  ![Create new account](assets/images/create-new-account.gif)
 
 ## Login and Authentication
 
 - Existing users can log in to their account by entering their username and master password. The application verifies the entered credentials to grant access to the stored passwords.
+
+  ![Log into existing account](assets/images/log-in-existing-account.gif)
 
 ## Display Stored Passwords
 
@@ -118,8 +121,6 @@ Cryptography - For encrypting and decrypting data.
 
 [Techsini](https://techsini.com) - For generating mockups.
 
-[Clideo](https://clideo.com/resize-video) - For resizing screen recorded videos.
-
 [Loom](https://www.loom.com) - For screen recording.
 
 # Testing
@@ -135,27 +136,37 @@ There are some lines of code that exceed the Pep8 recommended 79 character limit
 
 1.  When an exiting user logged in and tried to display their passwords, and error would occur "cryptography.fernet.InvalidToken" . The issue was with the decryption process of the stored passwords. Specifically encrypted data had an invalid signature.
 
-- To solve the issue I added error handling for exceptions raised during encryption, decryption, and file operations.
+    - To solve the issue I added error handling for exceptions raised during encryption, decryption, and file operations.
+
+<br>
 
 2.  Then when running the program again and selection the option to display passwords the user received the following error "Invalid password data. Failed to decrypt."
 
-- To solve this new issue I realized I had not added a function to generate an encryption key, once I added this and made sure that the encryption key was generated and used consistently, the program displayed the user passwords correctly.
+    - To solve this new issue I realized I had not added a function to generate an encryption key, once I added this and made sure that the encryption key was generated and used consistently, the program displayed the user passwords correctly.
+
+<br>
 
 3.  I was receiving an error when creating a new account and master password. This because I had forgotten to add the new key perimeter to multiple functions cause an error when running the program.
 
-- To fix this I added the necessary key perimeter to the functions that where missing this.
+    - To fix this I added the necessary key perimeter to the functions that where missing this.
 
-4. When generating a random password the user is asked to input a password length, the user could put any number and the function would return "+0".
+<br>
 
-- To fix this I added a max password length of 14 characters. Now if a user inputs a password length over 14 the function generates a password with the max length of 14 characters.
+4.  When generating a random password the user is asked to input a password length, the user could put any number and the function would return "+0".
 
-5. When loading the program the user is prompted, asking if they are a new user y/n. If the user entered any key that was not "n" the system would proceed as if the user selected "y".
+    - To fix this I added a max password length of 14 characters. Now if a user inputs a password length over 14 the function generates a password with the max length of 14 characters.
 
-- To fix this I added validation so that if any keys other that "y/n" are entered the system alerts the user of an invalid input and asks the original prompt.
+<br>
 
-6. When a users was entering a password, if the "backspaced" the system would take this a s a key entry as part of the password.
+5.  When loading the program the user is prompted, asking if they are a new user y/n. If the user entered any key that was not "n" the system would proceed as if the user selected "y".
 
-- To fix this I added and elif statement to the get_user_password function, so that when backspace is pressed it minuses 1 character. I then added an sys.stdout.write to remove the the asterisk displayed on the screen.
+    - To fix this I added validation so that if any keys other that "y/n" are entered the system alerts the user of an invalid input and asks the original prompt.
+
+<br>
+
+6.  When a users was entering a password, if the "backspaced" the system would take this a s a key entry as part of the password.
+
+    - To fix this I added and elif statement to the get_user_password function, so that when backspace is pressed it minuses 1 character. I then added an sys.stdout.write to remove the the asterisk displayed on the screen.
 
 ## Bugs
 
