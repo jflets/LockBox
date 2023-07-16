@@ -145,7 +145,7 @@ Cryptography - For encrypting and decrypting data.
 - Python
   - No errors or warnings where returned when using the [Pep8ci Validator](https://pep8ci.herokuapp.com/#)
 
-There are some lines of code that exceed the Pep8 recommended 79 character limit but, changing these lines will effect the functionality of the program. To make sure the Pep8 linter ignores the longer lines i have used # noqa.
+There are some lines of code that exceed the Pep8 recommended 79 character limit but, changing these lines will effect the functionality of the program. To make sure the Pep8 linter ignores the longer lines I have used # noqa.
 
 ## Solved Bugs
 
@@ -259,5 +259,13 @@ To clone the repository:
 # Credits
 
 ## Inspiration
+
+The inspiration for this password manager acme from youtube.
+
+[NuralNine](https://youtu.be/O8596GPSJV4) - Gave me an understanding of how to go about setting up the password manager.
+
+[Halledn](https://youtu.be/hkhyKJj28Ac) - Gave me an idea of logic for the password manager.
+
+[Tech Raj](https://youtu.be/KQjf9get6PE) - Gave me more ideas on how to set up th password manager.
 
 ## Code
