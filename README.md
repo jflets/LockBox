@@ -234,16 +234,16 @@ No bugs found.
 
 - As a returning user, I want to be able to log in to my existing account using my username and master password. I expect the application to validate my credentials and provide access to my stored passwords securely. I want to be able to view and manage my passwords, including adding new passwords and removing outdated ones.
 
-  - [Login as existing user](##-Login-and-Authentication)
-  - [Add new password](##-Add-New-Password)
-  - [Remove password](##-Remove-Password)
+  - [Login as existing user](#login-and-authentication)
+  - [Add new password](#add-new-password)
+  - [Remove password](#remove-password)
 
 3. Frequent User:
 
 - As a frequent user, I rely on LockBox to securely store and manage my passwords. I value its quick login, organized display of passwords, and features like adding and removing passwords. The password generator adds extra security. LockBox streamlines password management and protects my sensitive information.
 
-  - [Display passwords](##-Display-Stored-Passwords)
-  - [Add new password](##-Add-New-Password)
+  - [Display passwords](#display-stored-passwords)
+  - [Add new password](#add-new-password)
 
 # Full Testing
 
