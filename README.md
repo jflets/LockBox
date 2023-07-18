@@ -24,6 +24,39 @@ Click here to load [LockBox](https://lockbox-0538d34db4b9.herokuapp.com)
 
 4.  Menu Navigation: While in the main menu, you can choose the desired option by entering the corresponding number (1-4) and pressing Enter. If you enter an invalid choice, an error message will be displayed, and you can try again.
 
+# Table Of Contents
+
+- [How To Use](#how-to-use)
+- [Target Audience](#target-audience)
+  - [User Stories](#user-stories)
+- [Data Model](#data-model)
+  - [logic Map](#logic-map)
+- [Features](#features)
+  - [User Account Creation](#user-account-creation)
+  - [Login and Authentication](#login-and-authentication)
+  - [Display Stored Passwords](#display-stored-passwords)
+  - [Add New Password](#add-new-password)
+  - [Remove Password](#remove-password)
+  - [Encryption and Security](#encryption-and-security)
+  - [Error Handling](#error-handling)
+  - [Menu-based Navigation](#menu-based-navigation)
+  - [Features Left to Add](#features-left-to-add)
+- [Technologies Used](#technologies-used)
+- [Frameworks, Libraries and Programs Used](#frameworks-libraries-and-programs-used)
+- [Testing](#testing)
+  - [Validator Testing](#validator-testing)
+  - [Solved Bugs](#solved-bugs)
+  - [Bugs](#bugs)
+  - [Testing User Stories](#testing-user-stories)
+- [Full Testing](#full-testing)
+  - [Create new account and login](#create-new-account-and-login)
+  - [Menu navigation](#menu-navigation)
+- [Deployment](#deployment)
+  - [Local Development](#local-development)
+- [Credits](#credits)
+  - [Inspiration](#inspiration)
+  - [Code](#code)
+
 # Target Audience
 
 ## User Stories
@@ -195,13 +228,13 @@ No bugs found.
 
 - As a new user, I want to create a secure account with a unique username and master password. I want to be guided through the process of setting up my account and master password, ensuring that my password meets the required criteria. Once my account is set up, I want to be able to add and manage my passwords easily.
 
-  [Create New Account](##-User-Account-Creation)
+  - [Create new account](#user-account-creation)
 
 2. Returning User:
 
 - As a returning user, I want to be able to log in to my existing account using my username and master password. I expect the application to validate my credentials and provide access to my stored passwords securely. I want to be able to view and manage my passwords, including adding new passwords and removing outdated ones.
 
-  - [Login As Existing User](##-Login-and-Authentication)
+  - [Login as existing user](##-Login-and-Authentication)
   - [Add new password](##-Add-New-Password)
   - [Remove password](##-Remove-Password)
 
