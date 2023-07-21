@@ -123,8 +123,7 @@ class User:
         return password
 
 
-# Add error handling and validation to the get_password_from_user function
-def get_password_from_user(prompt="Enter password: "):
+def get_password_from_user(prompt="Enter password: ", hide_input=True):
     """
     Prompts the user to enter a password securely.
     """
@@ -155,8 +154,12 @@ def get_password_from_user(prompt="Enter password: "):
                         sys.stdout.flush()
                 else:
                     password += char
-                    sys.stdout.write("*")
-                    sys.stdout.flush()
+                    if hide_input:  # Hide password when adding manually
+                        sys.stdout.write("*")
+                        sys.stdout.flush()
+                    else:
+                        sys.stdout.write(char)
+                        sys.stdout.flush()
 
         finally:
             # Restore terminal settings
@@ -166,11 +169,13 @@ def get_password_from_user(prompt="Enter password: "):
         sys.stdout.flush()
 
         if len(password) < 4:
-            print("Password must be at least 4 characters long. Please try again.")  # noqa
+            print("Password must be at least 4 characters long. "
+            "Please try again.")
             continue
 
         if not any(char in string.punctuation for char in password):
-            print("Password must contain at least 1 special character. Please try again.")  # noqa
+            print("Password must contain at least 1 special character. "
+            "Please try again.")
             continue
 
         return password
