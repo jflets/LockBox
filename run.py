@@ -150,6 +150,49 @@ def remove_password(username):
     print("-" * 80)
 
 
+def login():
+    """
+    Prompt the user to login with their username and master password.
+    """
+    attempts = 0
+
+    while attempts < 3:
+        username = input("Enter your username: ").strip()
+
+        if not username:
+            print("Username cannot be blank. Please try again.")
+            continue
+
+        user = User(username)
+        hashed_master_password = user.read_master_password()
+
+        if not hashed_master_password:
+            attempts += 1
+            print("Username not found. Please try again or create a"
+            " new account.")
+        else:
+            print("Enter your master password: ", end="")
+            master_password = get_password_from_user(prompt="")
+
+            if user.hash_password(master_password) == hashed_master_password:
+                print("Login successful!")
+                return user
+            else:
+                attempts += 1
+                print("Incorrect master password. Please try again.")
+
+    create_new_account_choice = input("You have exceeded the maximum"
+    " number of attempts. "
+                                      "Would you like to create a new"
+                                      " account? (y/n): ")
+
+    if create_new_account_choice.lower() == "y":
+        create_new_account()
+    else:
+        print("Restarting LockBox Password Manager...")
+        main()
+
+
 def get_password_from_user(prompt="Enter password: ", hide_input=True):
     """
     Prompts the user to enter a password securely.
