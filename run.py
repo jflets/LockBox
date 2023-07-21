@@ -281,42 +281,18 @@ def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def generate_random_password(length=12):
-    """
-    Generates a random password with the specified length, enforcing a minimum length of 8 characters.  # noqa
-    """
-    if length < 8:
-        print("Minimum password length is 8 characters. Setting length to 8.")
-        length = 8
-
-    max_length = min(length, 14)  # Limit the maximum password length to 14
-    characters = string.ascii_letters + string.digits + string.punctuation
-    return "".join(random.choice(characters) for _ in range(max_length))
-
-
 def create_new_account():
-    clear_terminal()  # Clear the terminal screen
-
-    ascii_art = r"""
-    888                       888      888888b.
-    888                       888      888  "88b
-    888                       888      888  .88P
-    888      .d88b.   .d8888b 888  888 8888888K.   .d88b.  888  888
-    888     d88""88b d88P"    888 .88P 888  "Y88b d88""88b `Y8bd8P'
-    888     888  888 888      888888K  888    888 888  888   X88K
-    888     Y88..88P Y88b.    888 "88b 888   d88P Y88..88P .d8""8b.
-    88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
-
     """
+    Create a new account for a new user.
+    """
+    clear_terminal()
 
-    print(ascii_art)  # Display the ASCII art
+    # Display the ASCII art
+    display_ascii_art()
 
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
-    print("When creating a master password please ensure the following:")
-    print("The password is more than 4 characters and contains 1 special character.\n")  # noqa
 
-    # Prompt the user to enter a desired username
     username = input("Enter your desired username: ")
 
     while not username.strip():
@@ -327,69 +303,34 @@ def create_new_account():
         print("Username already exists. Please choose a different username.")
         return
 
-    # Prompt the user to create a master password without displaying the input
     master_password = get_password_from_user("Create a master password: ")
-
-    # Prompt the user to confirm the master password
     confirm_password = get_password_from_user("Confirm the master password: ")
 
     while master_password != confirm_password:
         print("Passwords do not match. Please try again.")
         master_password = get_password_from_user("Create a master password: ")
-        confirm_password = get_password_from_user("Confirm the master password: ")  # noqa
+        confirm_password = get_password_from_user("Confirm the master"
+        " password: ")
 
-    # Generate or retrieve the encryption key
-    key = get_encryption_key()
+    new_user = User(username)  # Create a new User instance for the new user
+    key = new_user.get_encryption_key()
 
-    # Write the master password for the new user
-    write_master_password(username, master_password)
+    new_user.write_master_password(master_password)
 
     print("New account and master password created successfully!")
 
-    # Prompt the user to enter the account name
-    account = input("Enter your account name: ")
+    input("Press Enter key to continue to the login...")
+    clear_terminal()
+    # Prompt the user to log in again before accessing the main menu
+    login_user = login()
+    while login_user is None:
+        print("Incorrect username or master password. Please try again.")
+        login_user = login()
 
-    # Prompt the user to enter a password without displaying the input
-    password = get_password_from_user("Enter password: ")
-
-    passwords = {account: password}
-
-    # Write the password for the new account
-    write_passwords(username, passwords, key)
-
-    print(f"New account '{account}' created successfully.")
-    clear_terminal()  # Clear the terminal screen
-    print("-" * 80)
-    print("Menu")
-    print("-" * 80)
-
-    # Load the menu loop
-    while True:
-        print("1. Display Passwords")
-        print("2. Add Password")
-        print("3. Remove Password")
-        print("4. Quit")
-        print("-" * 80)
-
-        choice = input("Enter your option (1-4): ")
-        print("-" * 80)
-
-        if choice == "1":
-            # Read the stored passwords for the current user
-            user_passwords = read_passwords(username, key)
-            # Display the stored passwords
-            display_passwords(username, user_passwords)
-        elif choice == "2":
-            # Add a new password for the current user
-            add_password(username)
-        elif choice == "3":
-            # Remove a password for the current user
-            remove_password(username)
-        elif choice == "4":
-            print("Exiting Password Manager. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+    if login_user:
+        input("Press any key to continue to the main menu...")
+        clear_terminal()
+        main_menu(login_user)
 
 
 def main():
