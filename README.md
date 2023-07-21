@@ -87,6 +87,35 @@ I also used termios and tty modules to manipulate the terminal so that I could d
 
 ![Logic Map](/assets/images/lock-box-logic-map2.png)
 
+Explication:
+
+1. The program starts by displaying the LockBox Password Manager's ASCII art and welcoming the user. This to ensure the user understands that the program has loaded and is ready to be used.
+
+2. It asks the user if they are a new user or an existing user. This is so the system can then follow the correct logic to either create a new account or load the login function.
+
+3. If the user is a new user (selects 'y'), the program prompts the user to enter a desired username and master password. It then creates a new account for the user by calling the create_new_account function.
+
+4. If the user is an existing user (selects 'n'), the program prompts the user to enter their username and master password using the login function. The user gets up to two attempts to enter the correct credentials. If the user fails both attempts, the user is prompted asking if they want to create a new account and the program is restarted.
+
+5. If the user enters the correct credentials, the program displays the main menu with the following options:
+
+- I decided to use a menu system as this was the easiest way for a user to interact with the system using the least amount of logic.
+
+- Display Passwords - the program reads and decrypts the user's passwords from the file and displays them.
+
+- Add Password - the program prompts the user to enter the site name associated with the password and choose whether to enter the password manually or generate a random password.
+
+  - If the user chooses to enter the password manually, the program prompts the user to enter the password.
+  - If the user chooses to generate a random password, the program prompts the user to enter the desired length of the password (limited to a maximum of 14 characters) and generates a random password.
+
+- Remove Password - the program prompts the user to enter the site name associated with the password they want to remove. If the account exists in the user's password list, the program asks for confirmation to remove the password. If confirmed, it removes the password from the list and updates the file with the new password list.
+
+- Quit - the program exits, and the Password Manager terminates.
+
+- Invalid choice - If the user selects an invalid option, the program informs the user and asks them to try again.
+
+6. After performing any of the actions (displaying passwords, adding or removing passwords, or quitting), the program loops back to the main menu, and the user can continue using the Password Manager as desired. I did this so that the user can decide when they want to finish using the program.
+
 # Features
 
 ## User Account Creation
