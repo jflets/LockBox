@@ -161,7 +161,16 @@ VScode - IDE used to code the site.
 
 [Heroku](https://heroku.com) - Site used for deployment.
 
-Cryptography - For encrypting and decrypting data.
+Libraries:
+
+- Random - Used to generate random numbers and selections, specifically for creating random passwords.
+- String - Provides sets of ASCII characters, like letters, digits, and punctuation, used in generating random passwords.
+- os - Interacts with the operating system, mainly used for file system operations, such as creating directories and managing file paths.
+- sys - Provides access to Python runtime environment variables and functions, mainly used to handle standard input and output.
+- tty - Used to handle terminal settings, specifically to disable terminal echoing when entering passwords.
+- termios - Used to control terminal input/output attributes, specifically setting the terminal to raw mode for secure password input.
+- Hashlib - Provides various hash functions, used in this code to hash passwords securely before storing them.
+- Cryptography.fernet - Used for secure encryption and decryption, specifically for encrypting and decrypting user passwords in the password manager.
 
 [Cloud Convert](https://cloudconvert.com) - Converting videos to gif.
 
@@ -180,7 +189,7 @@ Cryptography - For encrypting and decrypting data.
 - Python
   - No errors or warnings where returned when using the [Pep8ci Validator](https://pep8ci.herokuapp.com/#)
 
-There are some lines of code that exceed the Pep8 recommended 79 character limit but, changing these lines will effect the functionality of the program. To make sure the Pep8 linter ignores the longer lines I have used # noqa.
+There are messages explaining the line breaks for long lines "E128 continuation line under-indented for visual"
 
 ## Solved Bugs
 
