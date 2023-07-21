@@ -334,21 +334,14 @@ def create_new_account():
 
 
 def main():
-    clear_terminal()  # Clear the terminal screen
-
-    ascii_art = r"""
-    888                       888      888888b.
-    888                       888      888  "88b
-    888                       888      888  .88P
-    888      .d88b.   .d8888b 888  888 8888888K.   .d88b.  888  888
-    888     d88""88b d88P"    888 .88P 888  "Y88b d88""88b `Y8bd8P'
-    888     888  888 888      888888K  888    888 888  888   X88K
-    888     Y88..88P Y88b.    888 "88b 888   d88P Y88..88P .d8""8b.
-    88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
-
     """
+    Main function that serves as the entry point to the program.
+    """
+    clear_terminal()
 
-    print(ascii_art)
+    # Display the ASCII art
+    display_ascii_art()
+
     print("Welcome to the LockBox Password Manager!")
     print("This program allows you to manage your passwords securely.")
 
@@ -358,74 +351,23 @@ def main():
         new_user = input("Are you a new user? (y/n): ")
 
     if new_user.lower() == "y":
-        create_new_account()  # Create a new user account
-        return
-
-    # Prompt the user to enter their username
-    username = input("Enter your username: ")
-
-    # Read the stored master password hash for the username
-    stored_master_password_hash = read_master_password(username)
-
-    if stored_master_password_hash is None:
-        print("Invalid username. Exiting Password Manager. Goodbye!")
-        return
-
-    attempts = 0
-    while attempts < 2:
-        # Prompt the user to enter their master password without displaying the input  # noqa
-        entered_password = get_password_from_user("Enter your master password: ")  # noqa
-        entered_password_hash = hash_password(entered_password)
-
-        if entered_password_hash == stored_master_password_hash:
-            clear_terminal()  # Clear the terminal screen
-            print("Login successful!\n")
-            break
-        else:
-            print("Incorrect master password. Please try again.")
-            attempts += 1
+        create_new_account()
     else:
-        print("You have entered the wrong password multiple times.")
-        choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
-        while choice.lower() not in ["y", "n"]:
-            print("Invalid option. Please enter 'y' or 'n'.")
-            choice = input("Do you want to create a new master password and account? (y/n): ")  # noqa
+        user = login()
+        while user is None:
+            print("Incorrect username. Please try again or"
+            " create a new account.")
+            new_user = input("Are you a new user? (y/n): ")
+            if new_user.lower() == "y":
+                create_new_account()
+                break
+            else:
+                user = login()
 
-        if choice.lower() == "y":
-            create_new_account()  # Create a new user account
-        else:
-            print("Exiting Password Manager. Goodbye!")
-            return
-
-    # Generate or retrieve the encryption key
-    key = get_encryption_key()
-
-    while True:
-        print("1. Display Passwords")
-        print("2. Add Password")
-        print("3. Remove Password")
-        print("4. Quit")
-        print("-" * 80)
-
-        choice = input("Enter your option (1-4): ")
-        print("-" * 80)
-
-        if choice == "1":
-            # Read the stored passwords for the current user
-            user_passwords = read_passwords(username, key)
-            # Display the stored passwords
-            display_passwords(username, user_passwords)
-        elif choice == "2":
-            # Add a new password for the current user
-            add_password(username)
-        elif choice == "3":
-            # Remove a password for the current user
-            remove_password(username)
-        elif choice == "4":
-            print("Exiting Password Manager. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+        if user:
+            input("Press any key to continue to the main menu...")
+            clear_terminal()
+            main_menu(user)
 
 
 if __name__ == "__main__":
