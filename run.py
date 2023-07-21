@@ -156,7 +156,7 @@ def login():
     """
     attempts = 0
 
-    while attempts < 3:
+    while attempts < 2:
         username = input("Enter your username: ").strip()
 
         if not username:
