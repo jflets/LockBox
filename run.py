@@ -208,60 +208,68 @@ def get_password_from_user(prompt="Enter password: ", hide_input=True):
         return password
 
 
-# Handle exceptions and display appropriate error messages
 def display_passwords(username, passwords):
     """
     Displays the stored passwords for the given username.
     """
     print(f"Stored Passwords for user '{username}':")
     print()
-    # Check if passwords dictionary is empty or contains only the master password  # noqa
     if not passwords or all(account == username for account in passwords):
         print("No passwords stored for this user.")
     else:
         for account, password in passwords.items():
-            if account != username:  # Exclude master password from display
+            if account != username:
                 print(f"Account: {account}")
                 print(f"Password: {password}")
                 print("-" * 80)
     print("-" * 80)
 
 
-# Add error handling and validation to the add_password function
-def add_password(username):
+def add_password(user):
     """
-    Adds a new password for the given username and account.
+    Add a new password for the given username and account.
     """
     account = input("Enter the site name associated with this password: ")
-    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")  # noqa
+    password_option = input("Choose an option:\n1. Enter password manually\n2."
+    " Generate random password\n")
+
     if password_option == "1":
-        password = get_password_from_user()
+        password = get_password_from_user(prompt="Enter password: ",
+        hide_input=False)
     elif password_option == "2":
-        length = int(input("Enter the length of the password (max is 14): ") or "14")  # noqa
-        password = generate_random_password(length)
+        length = int(input("Enter the length of the password (max is 14): ")
+        or "14")
+
+        if length > 14:
+            print("Password length exceeds the maximum limit. "
+            "Generating a random password with 14 characters.")
+            password = user.generate_random_password(14)
+        else:
+            password = user.generate_random_password(length)
     else:
         print("Invalid option. Returning to the main menu.")
         return
 
-    # Retrieve the encryption key
-    key = get_encryption_key()
+    key = user.get_encryption_key()
 
-    passwords = read_passwords(username, key)
+    passwords = user.read_passwords()
     if account in passwords:
         choice = input(
-            f"An account with the name '{account}' already exists for the user '{username}'. "  # noqa
+            f"An account with the name '{account}' already exists"
+            " for the user '{user.username}'. "
             "Do you want to change the password? (y/n): "
         )
         if choice.lower() == "y":
             passwords[account] = password
-            write_passwords(username, passwords, key)
+            user.write_passwords(passwords)
             print(f"Password for account '{account}' changed successfully.")
         else:
             print("Returning to the main menu.")
     else:
         passwords[account] = password
-        write_passwords(username, passwords, key)
-        print(f"Password added successfully to the new account '{account}' for the user '{username}'.")  # noqa
+        user.write_passwords(passwords)
+        print(f"Password added successfully to the new account '{account}' "
+        "for the user '{user.username}'.")
         print(f"Password: {password}")
     print("-" * 80)
 
