@@ -274,13 +274,6 @@ def add_password(user):
     print("-" * 80)
 
 
-def clear_terminal():
-    """
-    Clears the terminal screen.
-    """
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
 def create_new_account():
     """
     Create a new account for a new user.
@@ -331,6 +324,31 @@ def create_new_account():
         input("Press any key to continue to the main menu...")
         clear_terminal()
         main_menu(login_user)
+
+
+def display_ascii_art():
+    """
+    Display the ASCII art representing the LockBox Password Manager.
+    """
+    ascii_art = r"""
+    888                       888      888888b.
+    888                       888      888  "88b
+    888                       888      888  .88P
+    888      .d88b.   .d8888b 888  888 8888888K.   .d88b.  888  888
+    888     d88""88b d88P"    888 .88P 888  "Y88b d88""88b `Y8bd8P'
+    888     888  888 888      888888K  888    888 888  888   X88K
+    888     Y88..88P Y88b.    888 "88b 888   d88P Y88..88P .d8""8b.
+    88888888 "Y88P"   "Y8888P 888  888 8888888P"   "Y88P"  888  888
+    """
+    clear_terminal()
+    print(ascii_art)
+
+
+def clear_terminal():
+    """
+    Clears the terminal screen.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def main():
