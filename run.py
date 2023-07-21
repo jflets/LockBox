@@ -121,6 +121,33 @@ class User:
         password = "".join(random.choice(characters) for _ in range(min(length,
         14)))
         return password
+    
+
+def remove_password(username):
+    """
+    Remove a password for the given username and account.
+    """
+    account = input("Enter the site name associated with the password"
+    " you want to remove: ")
+
+    key = User(username).get_encryption_key()
+
+    passwords = User(username).read_passwords()
+    if account in passwords:
+        choice = input(
+            f"Are you sure you want to remove the password for"
+            " account '{account}'? (y/n): "
+        )
+        if choice.lower() == "y":
+            del passwords[account]
+            User(username).write_passwords(passwords)
+            print(f"Password for account '{account}' removed successfully.")
+        else:
+            print("Returning to the main menu.")
+    else:
+        print(f"No password found for account '{account}' in"
+        " the user's passwords.")
+    print("-" * 80)
 
 
 def get_password_from_user(prompt="Enter password: ", hide_input=True):
@@ -237,22 +264,6 @@ def add_password(username):
         print(f"Password added successfully to the new account '{account}' for the user '{username}'.")  # noqa
         print(f"Password: {password}")
     print("-" * 80)
-
-
-# Add error handling and validation to the remove_password function
-def remove_password(username):
-    """
-    Removes a password for the given username and account.
-    """
-    account = input("Enter the account name: ")
-    key = get_encryption_key()
-    passwords = read_passwords(username, key)
-    if account in passwords:
-        del passwords[account]
-        write_passwords(username, passwords, key)
-        print(f"Password for account '{account}' removed successfully.")
-    else:
-        print(f"No password found for account '{account}'.")
 
 
 def clear_terminal():
