@@ -121,7 +121,7 @@ class User:
         password = "".join(random.choice(characters) for _ in range(min(length,
         14)))
         return password
-    
+
 
 def remove_password(username):
     """
