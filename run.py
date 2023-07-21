@@ -326,6 +326,36 @@ def create_new_account():
         main_menu(login_user)
 
 
+def main_menu(user):
+    """
+    Display the main menu and handle user interactions.
+    """
+    while True:
+        print("-" * 80)
+        print("Menu")
+        print("-" * 80)
+        print("1. Display Passwords")
+        print("2. Add Password")
+        print("3. Remove Password")
+        print("4. Quit")
+        print("-" * 80)
+        choice = input("Enter your option (1-4): ")
+        print("-" * 80)
+
+        if choice == "1":
+            user_passwords = user.read_passwords()
+            display_passwords(user.username, user_passwords)
+        elif choice == "2":
+            add_password(user)
+        elif choice == "3":
+            remove_password(user.username)
+        elif choice == "4":
+            print("Exiting Password Manager. Goodbye!")
+            sys.exit()
+        else:
+            print("Invalid choice. Please try again.")
+
+
 def display_ascii_art():
     """
     Display the ASCII art representing the LockBox Password Manager.
