@@ -155,6 +155,9 @@ Explication:
 - I have used (import hashlib) and
   (from cryptography.fernet import Fernet) to encrypt the data.
 
+  This is an example of what the encrypted user data looks like.
+  ![Example Encrypted Data](/assets/images/ecrypted-data-screenshot.png)
+
 ## Error Handling
 
 - The application handles various error scenarios gracefully, such as invalid input, incorrect passwords, non-existing accounts, and file access errors. It provides informative error messages to guide users and ensure a smooth user experience.
