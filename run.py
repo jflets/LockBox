@@ -11,104 +11,116 @@ PASSWORDS_DIR = "passwords/"
 KEY_FILE = "encryption_key.txt"
 
 
-def generate_key():
-    """
-    Generates a new encryption key using Fernet.
-    """
-    return Fernet.generate_key()
+class User:
+    def __init__(self, username):
+        """
+        Initialize a User instance with the provided username.
+        """
+        self.username = username
 
+    def generate_key(self):
+        """
+        Generate a new encryption key using Fernet.
+        """
+        return Fernet.generate_key()
 
-def get_encryption_key():
-    """
-    Retrieves the encryption key from the key file.
-    If the key file doesn't exist, generates a new key and saves it to the file.  # noqa
-    """
-    if os.path.isfile(KEY_FILE):
-        with open(KEY_FILE, "rb") as key_file:
-            key = key_file.read()
-    else:
-        key = generate_key()
-        with open(KEY_FILE, "wb") as key_file:
-            key_file.write(key)
-    return key
+    def get_encryption_key(self):
+        """
+        Retrieve the encryption key from the file or generate a"
+        " new one if it doesn't exist.
+        """
+        if os.path.isfile(KEY_FILE):
+            with open(KEY_FILE, "rb") as key_file:
+                key = key_file.read()
+        else:
+            key = self.generate_key()
+            with open(KEY_FILE, "wb") as key_file:
+                key_file.write(key)
+        return key
 
+    def read_master_password(self):
+        """
+        Read the hashed master password from the file if it exists.
+        """
+        try:
+            with open(f"{PASSWORDS_DIR}{self.username}/master_password.txt",
+            "r") as file:
+                return file.read().strip()
+        except FileNotFoundError:
+            return None
 
-def encrypt_data(data, key):
-    """
-    Encrypts the provided data using the encryption key.
-    """
-    cipher_suite = Fernet(key)
-    encrypted_data = cipher_suite.encrypt(data.encode())
-    return encrypted_data
+    def write_master_password(self, master_password):
+        """
+        Write the hashed master password to the file.
+        """
+        os.makedirs(f"{PASSWORDS_DIR}{self.username}", exist_ok=True)
+        hashed_password = self.hash_password(master_password)
+        with open(f"{PASSWORDS_DIR}{self.username}/master_password.txt",
+        "w") as file:
+            file.write(hashed_password)
 
+    def hash_password(self, password):
+        """
+        Hash the password using SHA-256.
+        """
+        return hashlib.sha256(password.encode()).hexdigest()
 
-def decrypt_data(encrypted_data, key):
-    """
-    Decrypts the provided encrypted data using the encryption key.
-    """
-    cipher_suite = Fernet(key)
-    decrypted_data = cipher_suite.decrypt(encrypted_data).decode()
-    return decrypted_data
+    def read_passwords(self):
+        """
+        Read and decrypt the user's passwords from the file.
+        """
+        try:
+            with open(f"{PASSWORDS_DIR}{self.username}/{self.username}.txt",
+            "rb") as file:
+                encrypted_data = file.read()
+                decrypted_data = self.decrypt_data(encrypted_data)
+                lines = decrypted_data.splitlines()
+                return {
+                    line.split(":")[0].strip(): line.split(":")[1].strip()
+                    for line in lines
+                }
+        except FileNotFoundError:
+            return {}
 
+    def write_passwords(self, passwords):
+        """
+        Write and encrypt the user's passwords to the file.
+        """
+        os.makedirs(f"{PASSWORDS_DIR}{self.username}", exist_ok=True)
+        with open(f"{PASSWORDS_DIR}{self.username}/{self.username}.txt",
+        "wb") as file:
+            data = "\n".join(
+                [f"{account}: {password}" for account, password in
+                passwords.items()]
+            )
+            encrypted_data = self.encrypt_data(data)
+            file.write(encrypted_data)
 
-def read_master_password(username):
-    """
-    Reads and returns the master password for the given username.
-    If the master password file is not found, returns None.
-    """
-    try:
-        with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "r") as file:  # noqa
-            return file.read().strip()
-    except FileNotFoundError:
-        return None
+    def encrypt_data(self, data):
+        """
+        Encrypt data using the encryption key.
+        """
+        cipher_suite = Fernet(self.get_encryption_key())
+        encrypted_data = cipher_suite.encrypt(data.encode())
+        return encrypted_data
 
+    def decrypt_data(self, encrypted_data):
+        """
+        Decrypt data using the encryption key.
+        """
+        cipher_suite = Fernet(self.get_encryption_key())
+        decrypted_data = cipher_suite.decrypt(encrypted_data).decode()
+        return decrypted_data
 
-def write_master_password(username, master_password):
-    """
-    Writes the hashed master password to the master password file for the given username.  # noqa
-    """
-    os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
-    hashed_password = hash_password(master_password)
-    with open(f"{PASSWORDS_DIR}{username}/master_password.txt", "w") as file:
-        file.write(hashed_password)
-
-
-def hash_password(password):
-    """
-    Hashes the provided password using SHA-256 algorithm.
-    """
-    return hashlib.sha256(password.encode()).hexdigest()
-
-
-def read_passwords(username, key):
-    """
-    Reads and returns the stored passwords for the given username.
-    If the passwords file is not found, returns an empty dictionary.
-    """
-    try:
-        with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "rb") as file:
-            encrypted_data = file.read()
-            decrypted_data = decrypt_data(encrypted_data, key)
-            lines = decrypted_data.splitlines()
-            return {
-                line.split(":")[0].strip(): line.split(":")[1].strip()
-                for line in lines
-            }
-    except FileNotFoundError:
-        return {}
-
-
-def write_passwords(username, passwords, key):
-    """
-    Writes the provided passwords to the passwords file for the given username.
-    """
-    os.makedirs(f"{PASSWORDS_DIR}{username}", exist_ok=True)
-    with open(f"{PASSWORDS_DIR}{username}/{username}.txt", "wb") as file:
-        data = "\n".join(
-            [f"{account}: {password}" for account, password in passwords.items()]  # noqa
-        )
-        encrypted_data = encrypt_data(data, key)
-        file.write(encrypted_data)
+    def generate_random_password(self, length):
+        """
+        Generate a random password of the specified length.
+        The maximum password length is limited to 14 characters.
+        """
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = "".join(random.choice(characters) for _ in range(min(length,
+        14)))
+        return password
 
 
 # Add error handling and validation to the get_password_from_user function
