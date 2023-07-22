@@ -118,8 +118,9 @@ class User:
         The maximum password length is limited to 14 characters.
         """
         characters = string.ascii_letters + string.digits + string.punctuation
-        password = "".join(random.choice(characters) for _ in range(min(length,
-        14)))
+        max_length = min(14, length)
+        password = "".join(random.choice(characters) for _ in range(
+            max_length))
         return password
 
 
@@ -273,22 +274,23 @@ def add_password(user):
     Add a new password for the given username and account.
     """
     account = input("Enter the site name associated with this password: ")
-    password_option = input("Choose an option:\n1. Enter password manually\n2."
-    " Generate random password\n")
+    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
 
     if password_option == "1":
-        password = get_password_from_user(prompt="Enter password: ",
-        hide_input=False)
+        password = get_password_from_user(prompt="Enter password: ", hide_input=False)
     elif password_option == "2":
-        length = int(input("Enter the length of the password (max is 14): ")
-        or "14")
+        while True:
+            length_input = input("Enter the length of the password (max is 14, minimum is 8): ")
+            try:
+                length = int(length_input)
+                if length < 8 or length > 14:
+                    print("Password length must be between 8 and 14 characters. Please try again.")
+                else:
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid number for the length.")
 
-        if length > 14:
-            print("Password length exceeds the maximum limit. "
-            "Generating a random password with 14 characters.")
-            password = user.generate_random_password(14)
-        else:
-            password = user.generate_random_password(length)
+        password = user.generate_random_password(length)
     else:
         print("Invalid option. Returning to the main menu.")
         return
