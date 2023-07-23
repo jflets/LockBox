@@ -223,6 +223,8 @@ def get_password_from_user(prompt="Enter password: ", hide_input=True):
                         # Erase the asterisk displayed on the screen
                         sys.stdout.write("\b \b")
                         sys.stdout.flush()
+                elif char.isspace():  # Ignore spaces and other whitespace characters
+                    continue
                 else:
                     password += char
                     if hide_input:  # Hide password when adding manually
@@ -235,18 +237,18 @@ def get_password_from_user(prompt="Enter password: ", hide_input=True):
         finally:
             # Restore terminal settings
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-
-        sys.stdout.write("\n")  # Move to the next line after password input
+        # Move to the next line after password input
+        sys.stdout.write("\n")
         sys.stdout.flush()
 
         if len(password) < 4:
-            print("Password must be at least 4 characters long. "
-            "Please try again.")
+            print("Password must be at least 4 characters long."
+                  " Please try again.")
             continue
 
         if not any(char in string.punctuation for char in password):
-            print("Password must contain at least 1 special character. "
-            "Please try again.")
+            print("Password must contain at least 1 special character."
+                  " Please try again.")
             continue
 
         return password
