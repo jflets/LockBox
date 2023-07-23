@@ -123,7 +123,7 @@ Explication:
 
 - The application allows new users to create an account by providing a unique username and a master password. The master password is used to secure the account and protect access to the stored passwords.
 
-  ![Create new account](assets/images/create-new-account.gif)
+  ![Create new account](assets/images/create-new-account-2.gif)
 
 ## Login and Authentication
 
