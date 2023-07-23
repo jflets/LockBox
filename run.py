@@ -223,7 +223,8 @@ def get_password_from_user(prompt="Enter password: ", hide_input=True):
                         # Erase the asterisk displayed on the screen
                         sys.stdout.write("\b \b")
                         sys.stdout.flush()
-                elif char.isspace():  # Ignore spaces and other whitespace characters
+                # Ignore spaces and other whitespace characters
+                elif char.isspace():
                     continue
                 else:
                     password += char
@@ -276,21 +277,26 @@ def add_password(user):
     Add a new password for the given username and account.
     """
     account = input("Enter the site name associated with this password: ")
-    password_option = input("Choose an option:\n1. Enter password manually\n2. Generate random password\n")
+    password_option = input("Choose an option:\n1."
+    " Enter password manually\n2. Generate random password\n")
 
     if password_option == "1":
-        password = get_password_from_user(prompt="Enter password: ", hide_input=False)
+        password = get_password_from_user(prompt="Enter password: ",
+        hide_input=False)
     elif password_option == "2":
         while True:
-            length_input = input("Enter the length of the password (max is 14, minimum is 8): ")
+            length_input = input("Enter the length of the password"
+            " (max is 14, minimum is 8): ")
             try:
                 length = int(length_input)
                 if length < 8 or length > 14:
-                    print("Password length must be between 8 and 14 characters. Please try again.")
+                    print("Password length must be between 8 and 14"
+                    " characters. Please try again.")
                 else:
                     break
             except ValueError:
-                print("Invalid input. Please enter a valid number for the length.")
+                print("Invalid input. Please enter a valid number"
+                " for the length.")
 
         password = user.generate_random_password(length)
     else:
