@@ -163,7 +163,7 @@ Explication:
 
 - The application handles various error scenarios gracefully, such as invalid input, incorrect passwords, non-existing accounts, and file access errors. It provides informative error messages to guide users and ensure a smooth user experience.
 
-  ![Error handling](assets/images/error-handling.gif)
+  ![Error handling](assets/images/new-error-handling.gif)
 
 ## Menu-based Navigation
 
