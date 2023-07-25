@@ -225,7 +225,7 @@ Libraries:
 
   - No errors or warnings where returned when using the [Pep8ci Validator](https://pep8ci.herokuapp.com/#)
 
-  [CI Python linter](/assets/images/no-error-linter.png)
+  ![CI Python linter](/assets/images/no-error-linter.png)
 
 ## Solved Bugs
 
