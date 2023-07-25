@@ -44,7 +44,7 @@ class User:
         """
         try:
             with open(f"{PASSWORDS_DIR}{self.username}/master_password.txt",
-            "r") as file:
+                      "r") as file:
                 return file.read().strip()
         except FileNotFoundError:
             return None
@@ -56,7 +56,7 @@ class User:
         os.makedirs(f"{PASSWORDS_DIR}{self.username}", exist_ok=True)
         hashed_password = self.hash_password(master_password)
         with open(f"{PASSWORDS_DIR}{self.username}/master_password.txt",
-        "w") as file:
+                  "w") as file:
             file.write(hashed_password)
 
     def hash_password(self, password):
@@ -71,7 +71,7 @@ class User:
         """
         try:
             with open(f"{PASSWORDS_DIR}{self.username}/{self.username}.txt",
-            "rb") as file:
+                      "rb") as file:
                 encrypted_data = file.read()
                 decrypted_data = self.decrypt_data(encrypted_data)
                 lines = decrypted_data.splitlines()
@@ -88,10 +88,10 @@ class User:
         """
         os.makedirs(f"{PASSWORDS_DIR}{self.username}", exist_ok=True)
         with open(f"{PASSWORDS_DIR}{self.username}/{self.username}.txt",
-        "wb") as file:
+                  "wb") as file:
             data = "\n".join(
                 [f"{account}: {password}" for account, password in
-                passwords.items()]
+                    passwords.items()]
             )
             encrypted_data = self.encrypt_data(data)
             file.write(encrypted_data)
@@ -129,7 +129,7 @@ def remove_password(username):
     Remove a password for the given username and account.
     """
     account = input("Enter the site name associated with the password"
-    " you want to remove: ")
+                    " you want to remove: ")
 
     key = User(username).get_encryption_key()
 
@@ -147,7 +147,7 @@ def remove_password(username):
             print("Returning to the main menu.")
     else:
         print(f"No password found for account '{account}' in"
-        " the user's passwords.")
+              " the user's passwords.")
     print("-" * 80)
 
 
@@ -170,7 +170,7 @@ def login():
         if not hashed_master_password:
             attempts += 1
             print("Username not found. Please try again or create a"
-            " new account.")
+                  " new account.")
         else:
             print("Enter your master password: ", end="")
             master_password = get_password_from_user(prompt="")
@@ -183,7 +183,7 @@ def login():
                 print("Incorrect master password. Please try again.")
 
     create_new_account_choice = input("You have exceeded the maximum"
-    " number of attempts. "
+                                      " number of attempts. "
                                       "Would you like to create a new"
                                       " account? (y/n): ")
 
@@ -278,25 +278,26 @@ def add_password(user):
     """
     account = input("Enter the site name associated with this password: ")
     password_option = input("Choose an option:\n1."
-    " Enter password manually\n2. Generate random password\n")
+                            " Enter password manually\n2. "
+                            "Generate random password\n")
 
     if password_option == "1":
         password = get_password_from_user(prompt="Enter password: ",
-        hide_input=False)
+                                          hide_input=False)
     elif password_option == "2":
         while True:
             length_input = input("Enter the length of the password"
-            " (max is 14, minimum is 8): ")
+                                 " (max is 14, minimum is 8): ")
             try:
                 length = int(length_input)
                 if length < 8 or length > 14:
                     print("Password length must be between 8 and 14"
-                    " characters. Please try again.")
+                          " characters. Please try again.")
                 else:
                     break
             except ValueError:
                 print("Invalid input. Please enter a valid number"
-                " for the length.")
+                      " for the length.")
 
         password = user.generate_random_password(length)
     else:
@@ -322,7 +323,7 @@ def add_password(user):
         passwords[account] = password
         user.write_passwords(passwords)
         print(f"Password added successfully to the new account '{account}' "
-        "for the user '{user.username}'.")
+              "for the user '{user.username}'.")
         print(f"Password: {password}")
     print("-" * 80)
 
@@ -356,7 +357,7 @@ def create_new_account():
         print("Passwords do not match. Please try again.")
         master_password = get_password_from_user("Create a master password: ")
         confirm_password = get_password_from_user("Confirm the master"
-        " password: ")
+                                                  " password: ")
 
     new_user = User(username)  # Create a new User instance for the new user
     key = new_user.get_encryption_key()
@@ -457,7 +458,7 @@ def main():
         user = login()
         while user is None:
             print("Incorrect username. Please try again or"
-            " create a new account.")
+                  " create a new account.")
             new_user = input("Are you a new user? (y/n): ")
             if new_user.lower() == "y":
                 create_new_account()
