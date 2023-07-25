@@ -139,9 +139,11 @@ Explication:
 
 ## Add New Password
 
-- The user can add a new password to their account. They provide the account name and choose either to enter the password manually or generate a random password. If manually entered, the password is validated to meet certain criteria (e.g., minimum length and containing at least one special character). The new password is then stored securely in the user's account.
+- The user can add a new password to their account. They provide the site name and choose either to enter the password manually or generate a random password. If manually entered, the password is validated to meet certain criteria (e.g., minimum length and containing at least one special character). The new password is then stored securely in the user's account.
 
   ![Add new password](assets/images/add-new-password.gif)
+
+  I have chosen to allow the user to enter the any site name without validation other than duplicate site names. As I wanted the user to be able to enter any site name and have a good user experience.
 
 ## Remove Password
 
@@ -220,9 +222,10 @@ Libraries:
 ## Validator Testing
 
 - Python
+
   - No errors or warnings where returned when using the [Pep8ci Validator](https://pep8ci.herokuapp.com/#)
 
-There are messages explaining the line breaks for long lines "E128 continuation line under-indented for visual"
+  [CI Python linter](/assets/images/no-error-linter.png)
 
 ## Solved Bugs
 
